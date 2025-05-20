@@ -23,7 +23,9 @@ A robust, console-based Java application that helps users track their income and
 
 - Demo Link for Text file Output --> https://drive.google.com/file/d/1a45Zv8Rz_puWoPo36JnbHhT63kZf5bVb/view?usp=sharing
 
-##Screenshots of Outputs:
+-----
+
+## Screenshots of Outputs:
 
 ![Screenshot 2025-05-21 022610](https://github.com/user-attachments/assets/f0a86cdc-bc15-4ae4-8679-d2b09f01432b)
 ![Screenshot 2025-05-21 022657](https://github.com/user-attachments/assets/4fafed33-afa2-4167-9a2a-a5e34d539e41)

@@ -33,8 +33,7 @@ A robust, console-based Java application that helps users track their income and
  - java.text
  - java.math
 
-## Enums and Streams
- - java.util.Enum
+## Streams
  - java.util.stream
 
 -----

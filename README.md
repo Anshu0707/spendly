@@ -17,6 +17,8 @@ A robust, console-based Java application that helps users track their income and
 
  - It supports sub-categories like salary, food, rent, business, etc.
 
+-----
+
 # Java APIs:
 
 ## Collections Framework

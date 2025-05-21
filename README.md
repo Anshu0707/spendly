@@ -26,7 +26,7 @@ A robust, console-based Java application that helps users track their income and
  - java.nio.file
  - java.io 
 
-## Daate and Time API
+## Date and Time API
  - java.time
 
 ## Numbers and Formatting

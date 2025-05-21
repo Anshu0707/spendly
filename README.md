@@ -17,23 +17,23 @@ A robust, console-based Java application that helps users track their income and
 
  - It supports sub-categories like salary, food, rent, business, etc.
 
-## Java APIs:
+# Java APIs:
 
-# Collections Framework
+## Collections Framework
   - java.util
 
-# File I/O & Utilities
+## File I/O & Utilities
  - java.nio.file
  - java.io 
 
-# Daate and Time API
+## Daate and Time API
  - java.time
 
-# Numbers and Formatting
+## Numbers and Formatting
  - java.text
  - java.math
 
-# Enums and Streams
+## Enums and Streams
  - java.util.Enum
  - java.util.stream
 

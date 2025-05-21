@@ -7,9 +7,7 @@ import com.expense_tracker.service.TransactionService;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DefaultTransactionService implements TransactionService {
 
@@ -74,8 +72,9 @@ public class DefaultTransactionService implements TransactionService {
     @Override
     public String getAllMonthsSummary() {
         List<Transaction> transactions = transactionRepository.getAllTransactions();
-        Map<String, Double> incomeMap = new HashMap<>();
-        Map<String, Double> expenseMap = new HashMap<>();
+        //key="YYYY-MM" and value = "val" for the following maps.
+        Map<String, Double> incomeMap = new HashMap<>(); //Total Monthly Summary of Incomes.
+        Map<String, Double> expenseMap = new HashMap<>(); //Total Monthly Summary of Expenses.
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
 
@@ -88,7 +87,7 @@ public class DefaultTransactionService implements TransactionService {
             }
         }
 
-        // Merge both into a sorted monthly summary
+        // Merge both into a sorted monthly summary using TreeSet(automatically sorted set)
         StringBuilder summary = new StringBuilder();
         var allMonths = new java.util.TreeSet<>(incomeMap.keySet());
         allMonths.addAll(expenseMap.keySet()); // ensure all months are included

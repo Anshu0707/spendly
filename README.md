@@ -17,6 +17,10 @@ A robust, console-based Java application that helps users track their income and
 
  - It supports sub-categories like salary, food, rent, business, etc.
 
+ - Temporary Storage -> In-memory "ArrayList" and Long-Term Persistence -> File I/O.
+
+ - Graceful exception handling using try-catch.
+
 -----
 
 # Java APIs:

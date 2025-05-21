@@ -6,8 +6,7 @@ import com.expense_tracker.model.TransactionType;
 import com.expense_tracker.util.DateUtil;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class InputHandler {
 

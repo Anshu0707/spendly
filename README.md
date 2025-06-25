@@ -1,6 +1,6 @@
 # Expense Tracker Java App 
 
-A robust, console-based Java application that helps users track their income and expenses month-wise with clear summaries, structured data entry.
+A robust, console-based Java application for tracking income and expenses month-wise, with clear summaries and structured data entry — built using SOLID principles for maintainability and scalability.
 
 Problem Statement --> https://drive.google.com/file/d/13i4US_qUQ8w2mNTlAkwyBdY95kA_fnmf/view?usp=sharing
 

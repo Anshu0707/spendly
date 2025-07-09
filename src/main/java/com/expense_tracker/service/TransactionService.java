@@ -1,11 +1,10 @@
 package com.expense_tracker.service;
 
-import com.expense_tracker.model.Transaction;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.io.IOException;
+
+import com.expense_tracker.model.Transaction;
 
 public interface TransactionService {
     void addTransaction(Transaction transaction);

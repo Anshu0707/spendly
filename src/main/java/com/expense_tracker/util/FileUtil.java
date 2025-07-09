@@ -1,8 +1,5 @@
 package com.expense_tracker.util;
 
-import com.expense_tracker.model.Transaction;
-import com.expense_tracker.model.TransactionType;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -11,8 +8,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
-import java.util.*;
+import java.util.TreeMap;
+
+import com.expense_tracker.model.Transaction;
+import com.expense_tracker.model.TransactionType;
 
 public class FileUtil {
 

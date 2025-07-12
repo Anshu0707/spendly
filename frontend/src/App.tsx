@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TransactionsPage from "./pages/TransactionsPage";
 import IncomePage from "./pages/IncomePage";
 import ExpensesPage from "./pages/ExpensesPage";
+import VisualiserPage from "./pages/VisualiserPage";
 import {
   HomeIcon,
   CurrencyDollarIcon,
@@ -59,7 +60,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="h-screen w-full bg-gradient-to-br from-gray-900 via-indigo-900 to-black flex overflow-hidden">
       <Sidebar />
-      <main className="flex-1 ml-64 px-4 sm:px-8 overflow-hidden">
+      <main className="flex-1 ml-64 px-4 sm:px-8 overflow-y-auto transaction-list-scroll">
         {children}
       </main>
     </div>
@@ -74,6 +75,7 @@ function App() {
           <Route path="/" element={<TransactionsPage />} />
           <Route path="/income" element={<IncomePage />} />
           <Route path="/expenses" element={<ExpensesPage />} />
+          <Route path="/visualiser" element={<VisualiserPage />} />
         </Routes>
       </DashboardLayout>
     </Router>

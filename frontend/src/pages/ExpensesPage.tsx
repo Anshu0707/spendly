@@ -8,6 +8,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { GiHamburger } from "react-icons/gi";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export type Transaction = {
   id?: number;
   amount: number;
@@ -40,7 +42,7 @@ export default function ExpensesPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/transactions")
+    fetch(`${apiUrl}/api/transactions`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch transactions");
         return res.json();

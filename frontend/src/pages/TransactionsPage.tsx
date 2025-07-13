@@ -6,6 +6,8 @@ import TransactionSummary from "../features/transactions/TransactionSummary";
 import { useState } from "react";
 import { useCallback } from "react";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function TransactionsPage() {
   const [refresh, setRefresh] = useState(0);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -13,7 +15,7 @@ export default function TransactionsPage() {
   const handleClearAll = useCallback(async () => {
     setClearing(true);
     try {
-      const res = await fetch("http://localhost:8080/api/transactions", {
+      const res = await fetch(`${apiUrl}/api/transactions`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to clear transactions");

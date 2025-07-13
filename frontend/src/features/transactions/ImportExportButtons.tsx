@@ -4,6 +4,8 @@ import {
   ArrowUpTrayIcon,
 } from "@heroicons/react/24/outline";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function ImportExportButtons({
   onImport,
 }: {
@@ -23,7 +25,7 @@ export default function ImportExportButtons({
     const formData = new FormData();
     formData.append("file", file);
     try {
-      const res = await fetch("http://localhost:8080/api/transactions/upload", {
+      const res = await fetch(`${apiUrl}/api/transactions/upload`, {
         method: "POST",
         body: formData,
       });
@@ -41,9 +43,7 @@ export default function ImportExportButtons({
   const handleExport = async () => {
     setExportError(null);
     try {
-      const res = await fetch(
-        "http://localhost:8080/api/transactions/download"
-      );
+      const res = await fetch(`${apiUrl}/api/transactions/download`);
       if (!res.ok) throw new Error("Failed to export transactions");
       const blob = await res.blob();
       const url = window.URL.createObjectURL(blob);

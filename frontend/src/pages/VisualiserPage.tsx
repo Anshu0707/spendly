@@ -28,6 +28,8 @@ ChartJS.register(
   Filler
 );
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function VisualiserPage() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
@@ -35,7 +37,7 @@ export default function VisualiserPage() {
   const [selectedChart, setSelectedChart] = useState("overview");
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/transactions")
+    fetch(`${apiUrl}/api/transactions`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch transactions");
         return res.json();

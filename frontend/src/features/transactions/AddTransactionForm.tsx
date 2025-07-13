@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const CATEGORY_TYPE_OPTIONS = [
   { label: "Salary", value: "SALARY", type: "INCOME" },
@@ -71,7 +72,7 @@ export default function AddTransactionForm({
             ? form.date.toISOString().slice(0, 10)
             : form.date,
       };
-      const res = await fetch("http://localhost:8080/api/transactions", {
+      const res = await fetch(`${apiUrl}/api/transactions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

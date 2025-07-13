@@ -48,7 +48,12 @@ export default function IncomePage() {
       })
       .then((data) => {
         setTransactions(
-          data.filter((tx: Transaction) => tx.transactionType === "INCOME")
+          data.filter(
+            (tx: Transaction) =>
+              tx.transactionType === "INCOME" ||
+              (tx.categoryType === "SALARY" &&
+                !["INCOME", "EXPENSE"].includes(tx.transactionType))
+          )
         );
       })
       .catch((err) => setError(err.message))

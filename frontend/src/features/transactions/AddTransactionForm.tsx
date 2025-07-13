@@ -65,7 +65,7 @@ export default function AddTransactionForm({
       const payload = {
         amount: Number(form.amount),
         transactionType: form.transactionType,
-        category: form.categoryType, // category is the enum value
+        category: form.categoryType, // flat string
         categoryType: form.categoryType, // categoryType is INCOME or EXPENSE
         date:
           form.date instanceof Date

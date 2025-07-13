@@ -49,7 +49,45 @@ This project strictly follows the **SOLID principles** of object-oriented progra
 ### ⚙️ Installation Steps
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/yourusername/expense-tracker.git
    cd expense-tracker
    ```
+
+2. **Start the backend (Spring Boot)**
+   cd backend
+   mvn clean install
+   mvn spring-boot:run
+
+3. **Start the frontend (React)**
+   cd ../frontend
+   npm install
+   npm run dev
+
+---
+
+## 👨‍💻 About Me
+
+I’m a full-stack engineer passionate about building performant, elegant, and modular web applications.
+
+🔗 LinkedIn – Anshuman Naithani
+🌐 Portfolio
+
+---
+
+## Previews
+
+- Home Page
+
+---
+
+- Income Page
+
+---
+
+- Expense Page
+
+---
+
+- Visualiser Page

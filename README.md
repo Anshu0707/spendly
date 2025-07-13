@@ -1,68 +1,55 @@
-# Expense Tracker Java App 
+# 💸 Expense Tracker
 
-A robust, console-based Java application for tracking income and expenses month-wise, with clear summaries and structured data entry — built using SOLID principles for maintainability and scalability.
+A modern, elegant expense tracking application built with **React**, **TypeScript**, and **Spring Boot**. This tool empowers users to manage, categorize, and visualize their financial transactions with clarity and ease — all while following best practices in software design and architecture.
 
-Problem Statement --> https://drive.google.com/file/d/13i4US_qUQ8w2mNTlAkwyBdY95kA_fnmf/view?usp=sharing
+---
 
-## Key Points:
+## ✨ Features
 
- - I strictly adhered to S.O.L.I.D. principles and object-oriented best practices, that is, no hard coupling and other important principles in the code.
+- 📌 **Transaction Management** – Add, view, and categorize expenses/incomes
+- 📂 **CSV/Text Import & Export** – Easily import/export data for offline access
+- 📊 **Data Visualization** – Clean animated UI to explore spending trends
+- 🧱 **Responsive Design** – Mobile-first, Tailwind-powered layout
+- 🛡️ **Robust Error Handling** – Graceful UX under failure conditions
 
- - CSV/Txt File Integration.
+---
 
- - Organizes and summarizes transactions monthly.
+## 🧠 Design Philosophy
 
- - Best coding practices and proper folder structure(Maven).
+This project strictly follows the **SOLID principles** of object-oriented programming to ensure:
 
- - Outputs readable, well-formatted transaction and summary data to a CSV/TXT file.
+- ✅ Scalability
+- ✅ Maintainability
+- ✅ Readability
+- ✅ Testability
 
- - It supports sub-categories like salary, food, rent, business, etc.
+---
 
- - Temporary Storage -> In-memory "ArrayList" and Long-Term Persistence -> File I/O.
+## 🔧 Tech Stack
 
- - Graceful exception handling using try-catch.
+| Layer         | Tech                                               |
+| ------------- | -------------------------------------------------- |
+| **Frontend**  | React, TypeScript, Tailwind CSS                    |
+| **Backend**   | Spring Boot (Java), REST APIs                      |
+| **Database**  | H2 (for development), planned migration to MongoDB |
+| **Utilities** | CSV/Text File I/O for import/export                |
 
------
+---
 
-# Java APIs:
+## 🚀 Getting Started
 
-## Collections Framework
-  - java.util
+### 📦 Prerequisites
 
-## File I/O & Utilities
- - java.nio.file
- - java.io 
+- [Node.js](https://nodejs.org/)
+- [Java JDK](https://adoptium.net/)
+- [Maven](https://maven.apache.org/)
 
-## Date and Time API
- - java.time
+---
 
-## Numbers and Formatting
- - java.text
- - java.math
+### ⚙️ Installation Steps
 
-## Streams
- - java.util.stream
-
------
-
-- Demo Link for Console Output   --> https://drive.google.com/file/d/1vM76Ky04WHc04iIOqSsbt45Xic5CbdxC/view?usp=sharing
-
-- Demo Link for Text file Output --> https://drive.google.com/file/d/1a45Zv8Rz_puWoPo36JnbHhT63kZf5bVb/view?usp=sharing
-
------
-
-## Screenshots of Outputs:
-----
-![Screenshot 2025-05-21 022610](https://github.com/user-attachments/assets/f0a86cdc-bc15-4ae4-8679-d2b09f01432b)
-----
-![Screenshot 2025-05-21 022657](https://github.com/user-attachments/assets/4fafed33-afa2-4167-9a2a-a5e34d539e41)
-----
-![Screenshot 2025-05-21 022750](https://github.com/user-attachments/assets/ba65522b-bdd9-44c7-ae6d-12a40bdc51de)
-----
-![Screenshot 2025-05-21 022804](https://github.com/user-attachments/assets/a6cddc54-ad4b-4b99-b7f3-4cb03e3d8e61)
-----
-![Screenshot 2025-05-21 022923](https://github.com/user-attachments/assets/d3ec7144-d8bf-4a63-bf70-f0f006daff0a)
-----
-![Screenshot 2025-05-21 023007](https://github.com/user-attachments/assets/67b13b5c-063f-40ed-9e2b-64118b11aedc)
-![Screenshot 2025-05-21 023729](https://github.com/user-attachments/assets/661f324b-d87e-4061-9b06-3c994efeefbb)
-
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/expense-tracker.git
+   cd expense-tracker
+   ```

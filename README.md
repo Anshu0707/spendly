@@ -1,4 +1,4 @@
-# 💸 Expense Tracker
+# 💸 Spendly
 
 A modern, elegant expense tracking application built with **React**, **TypeScript**, and **Spring Boot**. This tool empowers users to manage, categorize, and visualize their financial transactions with clarity and ease — all while following best practices in software design and architecture.
 
@@ -57,7 +57,7 @@ This project strictly follows the **SOLID principles** of object-oriented progra
 
 2. **Start the backend (Spring Boot)**
   
-  ```bash
+   ```bash
    cd backend
    mvn clean install
    mvn spring-boot:run
@@ -74,8 +74,8 @@ This project strictly follows the **SOLID principles** of object-oriented progra
 
 ## 👨‍💻 Contact Me
 
-🔗 LinkedIn – Anshuman Naithani
-🌐 Portfolio
+🔗 LinkedIn – Anshuman Naithani(https://www.linkedin.com/in/anshuman-naithani/)
+🌐 Portfolio(https://anshumannaithani.netlify.app/)
 
 ---
 

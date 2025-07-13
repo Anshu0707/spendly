@@ -56,20 +56,23 @@ This project strictly follows the **SOLID principles** of object-oriented progra
    ```
 
 2. **Start the backend (Spring Boot)**
+  
+  ```bash
    cd backend
    mvn clean install
    mvn spring-boot:run
+   ```
 
 3. **Start the frontend (React)**
+   
+   ```bash
    cd ../frontend
    npm install
    npm run dev
-
+   ```
 ---
 
-## 👨‍💻 About Me
-
-I’m a full-stack engineer passionate about building performant, elegant, and modular web applications.
+## 👨‍💻 Contact Me
 
 🔗 LinkedIn – Anshuman Naithani
 🌐 Portfolio
@@ -79,15 +82,22 @@ I’m a full-stack engineer passionate about building performant, elegant, and m
 ## Previews
 
 - Home Page
+<img width="2559" height="1209" alt="Screenshot 2025-07-13 202524" src="https://github.com/user-attachments/assets/755fcdae-06d5-4369-8db4-0392133fa01d" />
 
 ---
 
 - Income Page
+<img width="2559" height="1376" alt="Screenshot 2025-07-13 203503" src="https://github.com/user-attachments/assets/ddc1187e-54cb-4eb3-afc1-ce4b51c798e8" />
 
 ---
 
 - Expense Page
+<img width="2559" height="1377" alt="Screenshot 2025-07-13 203507" src="https://github.com/user-attachments/assets/e9823ee0-5851-465d-8cef-b49fad627803" />
 
 ---
 
 - Visualiser Page
+<img width="2559" height="1391" alt="Screenshot 2025-07-13 203517" src="https://github.com/user-attachments/assets/00b0c988-79f9-4a57-a91e-7aae26016a27" />
+
+- Insights Section
+<img width="2559" height="540" alt="Screenshot 2025-07-13 203523" src="https://github.com/user-attachments/assets/30b090db-c017-49ae-92db-25e8e65e9d17" />

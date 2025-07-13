@@ -74,8 +74,8 @@ This project strictly follows the **SOLID principles** of object-oriented progra
 
 ## 👨‍💻 Contact Me
 
-🔗 LinkedIn – Anshuman Naithani(https://www.linkedin.com/in/anshuman-naithani/)
-🌐 Portfolio(https://anshumannaithani.netlify.app/)
+- [🔗 LinkedIn – Anshuman Naithani](https://www.linkedin.com/in/anshuman-naithani/)
+- [🌐 Portfolio](https://anshumannaithani.netlify.app/)
 
 ---
 

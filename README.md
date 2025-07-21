@@ -1,4 +1,4 @@
-# 💸 Spendly
+<img width="2559" height="1042" alt="Screenshot 2025-07-22 015632" src="https://github.com/user-attachments/assets/ba2e3a65-faf2-4692-8021-a6bd7ad8c57a" /># 💸 Spendly
 
 A modern and elegant expense tracking application built with **React**, **TypeScript**, and **Spring Boot**. This tool empowers users to manage, categorize, and visualize their financial transactions with clarity and ease — all while following best practices in software design and architecture.
 
@@ -88,25 +88,25 @@ This project strictly follows the **SOLID principles** of object-oriented progra
 ## Previews
 
 - **Home Page**
-  "C:\Users\ASUS\OneDrive\Pictures\Screenshots\Screenshot 2025-07-22 015632.png"
+<img width="2559" height="1042" alt="Screenshot 2025-07-22 015632" src="https://github.com/user-attachments/assets/bca2187e-9949-4ef5-baeb-2dd12c19b5c2" />
 
 ---
 
 - **Income Page**
-  "C:\Users\ASUS\OneDrive\Pictures\Screenshots\Screenshot 2025-07-22 015655.png"
+<img width="2559" height="1182" alt="Screenshot 2025-07-22 015655" src="https://github.com/user-attachments/assets/ec972fc4-32f1-4257-b5ce-e64c452c1270" />
 
 ---
 
 - **Expense Page**
-  "C:\Users\ASUS\OneDrive\Pictures\Screenshots\Screenshot 2025-07-22 015717.png"
+<img width="2507" height="1439" alt="Screenshot 2025-07-22 015717" src="https://github.com/user-attachments/assets/43fbc68b-ac67-4965-b0ad-416e1bb77960" />
 
 ---
 
 - **Visualiser Page**
- "C:\Users\ASUS\OneDrive\Pictures\Screenshots\Screenshot 2025-07-22 015955.png"
+<img width="2505" height="1420" alt="Screenshot 2025-07-22 015955" src="https://github.com/user-attachments/assets/c957db83-831d-466c-a4a6-9bebdf63186a" />
 
 - **Insights Section**
-  "C:\Users\ASUS\OneDrive\Pictures\Screenshots\Screenshot 2025-07-22 020015.png"
+<img width="2064" height="484" alt="Screenshot 2025-07-22 020015" src="https://github.com/user-attachments/assets/c754cad6-45d7-48a3-9694-915c3dd23ff9" />
 
 ---
 

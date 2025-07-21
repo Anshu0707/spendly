@@ -8,7 +8,7 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 
-#Make the mvnw executable
+# Make the mvnw executable
 RUN chmod +x mvnw
 
 # Download dependencies (this step is cached unless pom.xml changes)
@@ -16,6 +16,9 @@ RUN ./mvnw dependency:go-offline
 
 # Copy the rest of the source code
 COPY . .
+
+# Make the mvnw executable AGAIN (after copying all files)
+RUN chmod +x mvnw
 
 # Build the application
 RUN ./mvnw package -DskipTests

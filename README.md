@@ -93,7 +93,7 @@ This project strictly follows the **SOLID principles** of object-oriented progra
 ---
 
 - **Income Page**
-<img width="2559" height="1182" alt="Screenshot 2025-07-22 015655" src="https://github.com/user-attachments/assets/ec972fc4-32f1-4257-b5ce-e64c452c1270" />
+<img width="2559" height="1181" alt="Screenshot 2025-07-22 020441" src="https://github.com/user-attachments/assets/3e72d9e7-bc43-4c43-a0e0-03463d046768" />
 
 ---
 

@@ -7,11 +7,14 @@ A modern and elegant expense tracking application built with **React**, **TypeSc
 ## ✨ Features
 
 - 📌 **Transaction Management** – Add, view, and categorize income/expenses
-- 📂 **CSV/Text Import & Export** – Import/export transaction data effortlessly for offline access
+- 📂 **CSV/Text/PDF Import & Export** – Import/export transaction data effortlessly for offline access
 - 📊 **Data Visualization** – Clean animated UI to explore spending patterns
 - 🧱 **Responsive Design** – Mobile-first, Tailwind-powered layout
-- 🛡️ **Robust Error Handling** – Graceful UX under failure conditions
-- 🌀 **Modern Animations & Loaders** – Framer Motion-powered row entry, sticky glassmorphic headers, animated empty states, topbar, and contextual spinners for smooth, immersive feedback
+- 🛡️ **Robust Error Handling** – Seamless user experience under failure conditions
+- ⚡ **Infinite Scroll & Server-side Pagination** – Lightning-fast UI, even with large datasets
+- 🌀 **Modern Animations & Loaders** – Framer Motion-powered animations and contextual spinners for smooth, immersive feedback
+- 📈 **Accurate Analytics** – Visualiser Page always fetches all data for correct graphs, regardless of pagination
+- 🧩 **Professional Architecture** – Clean separation of concerns, reusable components, and scalable context logic
 
 ---
 
@@ -23,17 +26,18 @@ This project strictly follows the **SOLID principles** of object-oriented progra
 - ✅ Maintainability
 - ✅ Readability
 - ✅ Testability
+- ✅ Performance (with paginated APIs and optimized frontend state)
 
 ---
 
 ## 🔧 Tech Stack
 
-| Layer         | Tech                                                |
-| ------------- | --------------------------------------------------- |
-| **Frontend**  | React, TypeScript, Tailwind CSS                     |
-| **Backend**   | Spring Boot (Java), REST APIs                       |
-| **Database**  | H2 (development), with planned migration to MongoDB |
-| **Utilities** | CSV/Text File I/O for import/export                 |
+| Layer         | Tech                                                           |
+| ------------- | -------------------------------------------------------------- |
+| **Frontend**  | React, TypeScript, Tailwind CSS, Framer Motion, Topbar         |
+| **Backend**   | Spring Boot (Java), REST APIs                                  |
+| **Database**  | PostgreSQL (production), H2 (development)                      |
+| **Utilities** | CSV/Text File I/O for import/export with PDF export supported. |
 
 ---
 
@@ -103,3 +107,11 @@ This project strictly follows the **SOLID principles** of object-oriented progra
 
 - **Insights Section**
   <img width="2559" height="540" alt="Screenshot 2025-07-13 203523" src="https://github.com/user-attachments/assets/30b090db-c017-49ae-92db-25e8e65e9d17" />
+
+---
+
+## Backend API Notes
+
+- The `/api/transactions` endpoint supports both paginated (with `page` and `size` params) and non-paginated (no params) fetches.
+- Visualiser Page always fetches all transactions for analytics, while the rest of the app uses pagination for performance.
+- All import/export, error handling, and UI feedback are robust and production-ready.

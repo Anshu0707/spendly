@@ -1,6 +1,8 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useTransactions } from "../../contexts/TransactionContext"; // <-- Import the context hook
+
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const CATEGORY_TYPE_OPTIONS = [
@@ -20,14 +22,13 @@ const initialForm = {
 };
 
 export default function AddTransactionForm({
-  onAdd,
   headerClassName,
   title,
 }: {
-  onAdd?: () => void;
   headerClassName?: string;
   title?: string;
 }) {
+  const { refresh } = useTransactions(); // <-- Use the context refresh
   const [form, setForm] = useState(initialForm);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -65,7 +66,7 @@ export default function AddTransactionForm({
       const payload = {
         amount: Number(form.amount),
         transactionType: form.transactionType,
-        category: form.categoryType, // category is the enum value
+        category: form.categoryType, // flat string
         categoryType: form.categoryType, // categoryType is INCOME or EXPENSE
         date:
           form.date instanceof Date
@@ -80,7 +81,7 @@ export default function AddTransactionForm({
       if (!res.ok) throw new Error("Failed to add transaction");
       setSuccess("Transaction added!");
       setForm(initialForm);
-      if (onAdd) onAdd();
+      refresh(); // <-- Refresh the context after successful add
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
@@ -182,6 +183,7 @@ export default function AddTransactionForm({
             className="w-full border border-violet-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white text-gray-900 shadow-md transition-all duration-200 focus:shadow-pink-200/60"
             wrapperClassName="w-full"
             required
+            popperClassName="z-50"
           />
         </div>
       </div>

@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import VisualiserPage from "./pages/VisualiserPage";
+import { TransactionProvider } from "./contexts/TransactionContext";
 import TransactionsPage from "./pages/TransactionsPage";
 import IncomePage from "./pages/IncomePage";
 import ExpensesPage from "./pages/ExpensesPage";
-import VisualiserPage from "./pages/VisualiserPage";
 import {
   HomeIcon,
   CurrencyDollarIcon,
@@ -70,14 +71,16 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
 function App() {
   return (
     <Router>
-      <DashboardLayout>
-        <Routes>
-          <Route path="/" element={<TransactionsPage />} />
-          <Route path="/income" element={<IncomePage />} />
-          <Route path="/expenses" element={<ExpensesPage />} />
-          <Route path="/visualiser" element={<VisualiserPage />} />
-        </Routes>
-      </DashboardLayout>
+      <TransactionProvider>
+        <DashboardLayout>
+          <Routes>
+            <Route path="/" element={<TransactionsPage />} />
+            <Route path="/income" element={<IncomePage />} />
+            <Route path="/expenses" element={<ExpensesPage />} />
+            <Route path="/visualiser" element={<VisualiserPage />} />
+          </Routes>
+        </DashboardLayout>
+      </TransactionProvider>
     </Router>
   );
 }

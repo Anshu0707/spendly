@@ -15,8 +15,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
-import com.expense_tracker.model.Transaction;
 import com.expense_tracker.model.TransactionType;
+import com.expense_tracker.model.entity.Transaction;
 
 public class FileUtil {
 
@@ -74,7 +74,7 @@ public class FileUtil {
 
                 var transactionType = com.expense_tracker.model.TransactionType.valueOf(transactionTypeStr.toUpperCase());
                 var categoryType = com.expense_tracker.model.CategoryType.valueOf(categoryTypeStr.toUpperCase());
-                var category = new com.expense_tracker.model.Category(categoryType.name(),categoryType);
+                var category = new com.expense_tracker.model.entity.Category(categoryType.name(),categoryType);
                 var date = java.time.LocalDate.parse(dateStr);
 
                 transactions.add(new Transaction(amount, transactionType, category, date));

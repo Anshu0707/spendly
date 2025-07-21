@@ -1,11 +1,8 @@
-import type { Transaction } from "./TransactionList";
 import AnimatedNumber from "../../ui/AnimatedNumber";
+import { useTransactions } from "../../contexts/TransactionContext";
 
-export default function TransactionSummary({
-  transactions,
-}: {
-  transactions: Transaction[];
-}) {
+export default function TransactionSummary() {
+  const { transactions, loading, error } = useTransactions();
   const income = transactions
     .filter((t) => t.transactionType === "INCOME")
     .reduce((sum, t) => sum + Number(t.amount), 0);
@@ -13,6 +10,13 @@ export default function TransactionSummary({
     .filter((t) => t.transactionType === "EXPENSE")
     .reduce((sum, t) => sum + Number(t.amount), 0);
   const balance = income - expenses;
+
+  if (loading) {
+    return <div className="text-center py-8">Loading...</div>;
+  }
+  if (error) {
+    return <div className="text-center text-red-500 py-8">{error}</div>;
+  }
 
   return (
     <div className="flex flex-col md:flex-row gap-6 justify-center mb-10 animate-fade-in">
@@ -22,7 +26,7 @@ export default function TransactionSummary({
             🟢
           </span>
           <div className="font-extrabold text-base tracking-wide uppercase text-gray-900 drop-shadow-sm min-h-[28px] flex items-center justify-center">
-            Total Income
+            Incomes
           </div>
           <div className="text-2xl font-extrabold text-green-600 drop-shadow-md mt-2 animate-pulse flex items-end justify-center min-h-[36px]">
             <AnimatedNumber value={income} />
@@ -35,7 +39,7 @@ export default function TransactionSummary({
             💸
           </span>
           <div className="font-extrabold text-base tracking-wide uppercase text-gray-900 drop-shadow-sm min-h-[28px] flex items-center justify-center">
-            Total Expenses
+            Expenses
           </div>
           <div className="text-2xl font-extrabold text-pink-600 drop-shadow-md mt-2 animate-pulse flex items-end justify-center min-h-[36px]">
             <AnimatedNumber value={expenses} />

@@ -1,59 +1,95 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
+import { useTransactions } from "../contexts/TransactionContext";
 import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
-import {
-  BriefcaseIcon,
-  BuildingOffice2Icon,
-  TruckIcon,
-  QuestionMarkCircleIcon,
-} from "@heroicons/react/24/outline";
+import { TransactionList } from "../components/transactions/TransactionList";
+import type { Transaction } from "../contexts/TransactionContext";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
-const apiUrl = import.meta.env.VITE_API_URL;
-
-export type Transaction = {
-  id?: number;
-  amount: number;
-  transactionType: string;
-  category: string;
-  categoryType?: string;
-  date: string;
-};
-
-function getCategoryIcon(category: string) {
-  switch (category.toUpperCase()) {
-    case "SALARY":
-      return <span className="text-green-400 text-lg">💰</span>;
-    case "BUSINESS":
-      return <BriefcaseIcon className="w-6 h-6 text-blue-400" />;
-    case "RENT":
-      return <BuildingOffice2Icon className="w-6 h-6 text-yellow-400" />;
-    case "TRAVEL":
-      return <TruckIcon className="w-6 h-6 text-purple-400" />;
-    case "FOOD":
-      return <QuestionMarkCircleIcon className="w-6 h-6 text-gray-400" />;
-    default:
-      return <QuestionMarkCircleIcon className="w-6 h-6 text-gray-400" />;
+function sortTransactions(
+  transactions: Transaction[],
+  sortAmount: string,
+  sortMonth: string
+) {
+  const sorted = [...transactions];
+  if (sortAmount !== "none") {
+    sorted.sort((a, b) =>
+      sortAmount === "asc" ? a.amount - b.amount : b.amount - a.amount
+    );
   }
+  if (sortMonth !== "none") {
+    sorted.sort((a, b) => {
+      const aMonth = new Date(a.date).getMonth();
+      const bMonth = new Date(b.date).getMonth();
+      return sortMonth === "asc" ? aMonth - bMonth : bMonth - aMonth;
+    });
+  }
+  return sorted;
 }
 
 export default function IncomePage() {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { transactions, loading, error } = useTransactions();
+  const [sortAmount, setSortAmount] = useState("none");
+  const [sortMonth, setSortMonth] = useState("none");
 
-  useEffect(() => {
-    fetch(`${apiUrl}/api/transactions`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch transactions");
-        return res.json();
-      })
-      .then((data) => {
-        setTransactions(
-          data.filter((tx: Transaction) => tx.transactionType === "INCOME")
-        );
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, []);
+  const incomeTransactions = useMemo(
+    () =>
+      transactions.filter(
+        (tx: Transaction) =>
+          tx.transactionType === "INCOME" ||
+          (tx.categoryType === "SALARY" &&
+            !["INCOME", "EXPENSE"].includes(tx.transactionType))
+      ),
+    [transactions]
+  );
+
+  const sortedTransactions = useMemo(
+    () => sortTransactions(incomeTransactions, sortAmount, sortMonth),
+    [incomeTransactions, sortAmount, sortMonth]
+  );
+
+  const handleSortAmount = (val: string) => {
+    setSortAmount(val === "reset" ? "none" : val);
+    if (val !== "none" && val !== "reset") setSortMonth("none");
+  };
+  const handleSortMonth = (val: string) => {
+    setSortMonth(val === "reset" ? "none" : val);
+    if (val !== "none" && val !== "reset") setSortAmount("none");
+  };
+
+  const headerControls = (
+    <>
+      <div className="relative min-w-[180px]">
+        <select
+          className="appearance-none rounded-xl px-4 py-2 bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 text-gray-200 border-2 border-green-400 focus:border-green-500 focus:ring-2 focus:ring-green-300 shadow-lg font-semibold transition-all w-full pr-8 focus:scale-105"
+          value={sortAmount}
+          onChange={(e) => handleSortAmount(e.target.value)}
+        >
+          <option value="none" disabled hidden>
+            Sort by Amount
+          </option>
+          <option value="reset">None</option>
+          <option value="asc">Amount: Low to High</option>
+          <option value="desc">Amount: High to Low</option>
+        </select>
+        <ChevronDownIcon className="w-4 h-4 text-green-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+      </div>
+      <div className="relative min-w-[180px]">
+        <select
+          className="appearance-none rounded-xl px-4 py-2 bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 text-gray-200 border-2 border-green-400 focus:border-green-500 focus:ring-2 focus:ring-green-300 shadow-lg font-semibold transition-all w-full pr-8 focus:scale-105"
+          value={sortMonth}
+          onChange={(e) => handleSortMonth(e.target.value)}
+        >
+          <option value="none" disabled hidden>
+            Sort by Month
+          </option>
+          <option value="reset">None</option>
+          <option value="asc">Month: Low to High</option>
+          <option value="desc">Month: High to Low</option>
+        </select>
+        <ChevronDownIcon className="w-4 h-4 text-green-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+      </div>
+    </>
+  );
 
   return (
     <div className="w-full px-4 pt-3 pb-4 h-screen flex flex-col overflow-hidden">
@@ -64,55 +100,17 @@ export default function IncomePage() {
         <div className="text-center text-gray-300 py-8">Loading...</div>
       ) : error ? (
         <div className="text-center text-red-500 py-8">{error}</div>
-      ) : transactions.length === 0 ? (
+      ) : sortedTransactions.length === 0 ? (
         <div className="text-center text-gray-400 py-8">
           No income transactions found.
         </div>
       ) : (
-        <div className="flex-1 w-full overflow-y-auto overflow-x-hidden pr-2 max-h-[calc(100vh-120px)] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          {/* Fixed Header Row */}
-          <div className="sticky top-0 z-10 bg-gray-900/95 backdrop-blur-sm border-b border-gray-700 p-6 mb-0">
-            <div className="flex items-center justify-between w-full text-gray-300 font-semibold">
-              <div className="flex items-center gap-4">
-                <div className="w-6 h-6 flex items-center justify-center">
-                  <span className="text-lg">📊</span>
-                </div>
-                <span>Category</span>
-              </div>
-              <div className="flex items-center gap-8">
-                <span className="text-center w-[120px]">Amount</span>
-                <span className="text-center w-[110px]">Date</span>
-              </div>
-            </div>
-          </div>
-          <ul className="flex flex-col gap-0 w-full max-w-none">
-            {transactions.map((tx, idx) => (
-              <li
-                key={idx}
-                className="bg-gradient-to-r from-gray-800/80 to-gray-900/80 border border-green-500/20 p-6 flex flex-col md:flex-row md:items-center md:justify-between shadow-2xl break-words w-full shadow-white/10"
-              >
-                <div className="flex items-center justify-between w-full">
-                  <div className="flex items-center gap-4">
-                    <div className="w-6 h-6 flex items-center justify-center">
-                      {getCategoryIcon(tx.category)}
-                    </div>
-                    <span className="text-gray-300 font-medium">
-                      {tx.category}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-8">
-                    <span className="text-lg font-semibold text-green-300 text-center w-[120px]">
-                      ₹{tx.amount.toFixed(2)}
-                    </span>
-                    <span className="text-gray-400 text-sm text-center w-[110px]">
-                      {new Date(tx.date).toLocaleDateString()}
-                    </span>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <TransactionList
+          transactions={sortedTransactions}
+          colorClass="border-green-500"
+          maxHeight="700px"
+          headerControls={headerControls}
+        />
       )}
     </div>
   );

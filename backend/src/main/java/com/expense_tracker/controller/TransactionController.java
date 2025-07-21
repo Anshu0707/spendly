@@ -1,12 +1,11 @@
 package com.expense_tracker.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.OutputStreamWriter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,13 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import com.expense_tracker.dto.TransactionDTO;
 import com.expense_tracker.model.CategoryType;
 import com.expense_tracker.model.TransactionType;
 import com.expense_tracker.model.entity.Category;
 import com.expense_tracker.model.entity.Transaction;
+import com.expense_tracker.repository.TransactionRepository;
 import com.expense_tracker.service.TransactionService;
+import com.opencsv.CSVWriter;
 
 import jakarta.validation.Valid;
 
@@ -36,10 +38,12 @@ import jakarta.validation.Valid;
 public class TransactionController {
 
     private final TransactionService transactionService;
+    private final TransactionRepository transactionRepository;
 
     @Autowired
-    public TransactionController(TransactionService transactionService) {
+    public TransactionController(TransactionService transactionService, TransactionRepository transactionRepository) {
         this.transactionService = transactionService;
+        this.transactionRepository = transactionRepository;
     }
 
     @PostMapping
@@ -49,9 +53,15 @@ public class TransactionController {
     }
 
     @GetMapping
-    public List<TransactionDTO> getAllTransactions() {
-        List<Transaction> transactions = transactionService.getAllTransactions();
-        return transactions.stream().map(this::mapToDTO).toList();
+    public Object getAllTransactions(@RequestParam(value = "page", required = false) Integer page,
+                                     @RequestParam(value = "size", required = false) Integer size) {
+        if (page != null && size != null) {
+            Page<Transaction> paged = transactionService.getTransactionsPage(PageRequest.of(page, size));
+            return paged.map(this::mapToDTO);
+        } else {
+            List<Transaction> transactions = transactionService.getAllTransactions();
+            return transactions.stream().map(this::mapToDTO).toList();
+        }
     }
 
     @GetMapping("/summary/{year}/{month}")
@@ -76,20 +86,25 @@ public ResponseEntity<String> uploadTransactions(@RequestParam("file") Multipart
 }
 
 
-@GetMapping("/download")
-public ResponseEntity<Resource> downloadTransactions() {
-    try {
-        File file = transactionService.generateCSVFromTransactions();
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+    @GetMapping("/download")
+    public ResponseEntity<StreamingResponseBody> downloadTransactions() {
+        StreamingResponseBody stream = out -> {
+            try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(out))) {
+                writer.writeNext(new String[]{"amount", "categoryType", "date"});
+                transactionRepository.findAll().forEach(tx -> {
+                    writer.writeNext(new String[]{
+                        String.valueOf(tx.getAmount()),
+                        tx.getCategory().getCategoryType().name(),
+                        tx.getDate().toString()
+                    });
+                });
+            }
+        };
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=transactions.csv")
                 .contentType(MediaType.parseMediaType("text/csv"))
-                .contentLength(file.length())
-                .body(resource);
-    } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                .body(stream);
     }
-}
 
 
     @DeleteMapping

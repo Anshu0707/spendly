@@ -1,6 +1,5 @@
-
 import AnimatedNumber from "../../ui/AnimatedNumber";
-import { useTransactions } from "./TransactionContext";
+import { useTransactions } from "../../contexts/TransactionContext";
 
 export default function TransactionSummary() {
   const { transactions, loading, error } = useTransactions();

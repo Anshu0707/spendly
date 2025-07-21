@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useTransactions } from "./TransactionContext"; // <-- Import the context hook
+import { useTransactions } from "../../contexts/TransactionContext"; // <-- Import the context hook
 
 const apiUrl = import.meta.env.VITE_API_URL;
 

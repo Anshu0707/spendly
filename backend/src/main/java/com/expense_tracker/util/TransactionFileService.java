@@ -27,14 +27,21 @@ public class TransactionFileService {
             String[] line;
             reader.readNext(); // skip header
             while ((line = reader.readNext()) != null) {
-                double amount = Double.parseDouble(line[0]);
-                TransactionType type = TransactionType.valueOf(line[1]);
-                String categoryName = line[2];
-                CategoryType categoryType = CategoryType.valueOf(line[3]);
-                LocalDate date = LocalDate.parse(line[4]);
+                // double amount = Double.parseDouble(line[0]);
+                // TransactionType type = TransactionType.valueOf(line[1]);
+                // String categoryName = line[2];
+                // CategoryType categoryType = CategoryType.valueOf(line[3]);
+                // LocalDate date = LocalDate.parse(line[4]);
 
-                Category category = new Category(categoryName, categoryType);
-                Transaction tx = new Transaction(amount, type, category, date);
+                // Category category = new Category(categoryName, categoryType);
+                // Transaction tx = new Transaction(amount, type, category, date);
+                double amount = Double.parseDouble(line[0]);
+CategoryType categoryType = CategoryType.valueOf(line[1]);
+TransactionType type = categoryType.getTransactionType();
+LocalDate date = LocalDate.parse(line[2]);
+
+Category category = new Category(categoryType.name(), categoryType);
+Transaction tx = new Transaction(amount, type, category, date);
                 transactions.add(tx);
             }
         }
@@ -44,17 +51,25 @@ public class TransactionFileService {
 
     public void saveTransactions(String filePath, List<Transaction> transactions) throws IOException {
         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath))) {
-            writer.writeNext(new String[]{"amount", "transactionType", "category", "categoryType", "date"});
+            // writer.writeNext(new String[]{"amount", "transactionType", "category", "categoryType", "date"});
 
-            for (Transaction tx : transactions) {
-                writer.writeNext(new String[]{
-                        String.valueOf(tx.getAmount()),
-                        tx.getTransactionType().name(),
-                        tx.getCategory().toString(),
-                        tx.getCategory().getCategoryType().name(),
-                        tx.getDate().toString()
-                });
-            }
+            // for (Transaction tx : transactions) {
+            //     writer.writeNext(new String[]{
+            //             String.valueOf(tx.getAmount()),
+            //             tx.getTransactionType().name(),
+            //             tx.getCategory().toString(),
+            //             tx.getCategory().getCategoryType().name(),
+            //             tx.getDate().toString()
+            //     });
+            // }
+            writer.writeNext(new String[]{"amount", "categoryType", "date"});
+for (Transaction tx : transactions) {
+    writer.writeNext(new String[]{
+        String.valueOf(tx.getAmount()),
+        tx.getCategory().getCategoryType().name(),
+        tx.getDate().toString()
+    });
+}
         }
     }
 }

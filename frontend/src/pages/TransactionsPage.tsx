@@ -1,13 +1,13 @@
 import { useState, useCallback } from "react";
-import { useTransactions } from "../features/transactions/TransactionContext";
-import AddTransactionForm from "../features/transactions/AddTransactionForm";
-import TransactionSummary from "../features/transactions/TransactionSummary";
-import TransactionList from "../features/transactions/TransactionList";
-import ImportExportButtons from "../features/transactions/ImportExportButtons";
+import { useTransactions } from "../contexts/TransactionContext";
+import AddTransactionForm from "../components/transactions/AddTransactionForm";
+import TransactionSummary from "../components/transactions//TransactionSummary";
+import { TransactionList } from "../components/transactions//TransactionList";
+import ImportExportButtons from "../components/transactions//ImportExportButtons";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function TransactionsPage() {
-  const { refresh } = useTransactions();
+  const { transactions, refresh } = useTransactions();
   const [clearing, setClearing] = useState(false);
   const handleClearAll = useCallback(async () => {
     setClearing(true);
@@ -41,7 +41,11 @@ export default function TransactionsPage() {
               Quick View
             </h2>
             <div className="flex-1">
-              <TransactionList />
+              <TransactionList
+                transactions={transactions}
+                colorClass="border-violet-500"
+                maxHeight="360px"
+              />
             </div>
           </div>
         </div>

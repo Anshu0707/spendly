@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,6 +40,11 @@ public class DefaultTransactionService implements TransactionService {
     @Override
     public List<Transaction> getAllTransactions() {
         return transactionRepository.findAll();
+    }
+
+    @Override
+    public Page<Transaction> getTransactionsPage(Pageable pageable) {
+        return transactionRepository.findAll(pageable);
     }
 
     @Override

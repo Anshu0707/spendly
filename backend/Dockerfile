@@ -27,4 +27,4 @@ RUN ./mvnw package -DskipTests
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "target/expense-tracker-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/expense_racker-0.0.1-SNAPSHOT.jar"]

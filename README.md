@@ -88,25 +88,25 @@ This project strictly follows the **SOLID principles** of object-oriented progra
 ## Previews
 
 - **Home Page**
-  <img width="2559" height="1209" alt="Screenshot 2025-07-13 202524" src="https://github.com/user-attachments/assets/755fcdae-06d5-4369-8db4-0392133fa01d" />
+<img width="2559" height="1042" alt="Screenshot 2025-07-22 015632" src="https://github.com/user-attachments/assets/bca2187e-9949-4ef5-baeb-2dd12c19b5c2" />
 
 ---
 
 - **Income Page**
-  <img width="2559" height="1376" alt="Screenshot 2025-07-13 203503" src="https://github.com/user-attachments/assets/ddc1187e-54cb-4eb3-afc1-ce4b51c798e8" />
+<img width="2559" height="1181" alt="Screenshot 2025-07-22 020441" src="https://github.com/user-attachments/assets/3e72d9e7-bc43-4c43-a0e0-03463d046768" />
 
 ---
 
 - **Expense Page**
-  <img width="2559" height="1377" alt="Screenshot 2025-07-13 203507" src="https://github.com/user-attachments/assets/e9823ee0-5851-465d-8cef-b49fad627803" />
+<img width="2507" height="1439" alt="Screenshot 2025-07-22 015717" src="https://github.com/user-attachments/assets/43fbc68b-ac67-4965-b0ad-416e1bb77960" />
 
 ---
 
 - **Visualiser Page**
-  <img width="2559" height="1391" alt="Screenshot 2025-07-13 203517" src="https://github.com/user-attachments/assets/00b0c988-79f9-4a57-a91e-7aae26016a27" />
+<img width="2505" height="1420" alt="Screenshot 2025-07-22 015955" src="https://github.com/user-attachments/assets/c957db83-831d-466c-a4a6-9bebdf63186a" />
 
 - **Insights Section**
-  <img width="2559" height="540" alt="Screenshot 2025-07-13 203523" src="https://github.com/user-attachments/assets/30b090db-c017-49ae-92db-25e8e65e9d17" />
+<img width="2064" height="484" alt="Screenshot 2025-07-22 020015" src="https://github.com/user-attachments/assets/c754cad6-45d7-48a3-9694-915c3dd23ff9" />
 
 ---
 

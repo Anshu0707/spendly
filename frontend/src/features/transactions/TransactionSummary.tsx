@@ -1,11 +1,9 @@
-import type { Transaction } from "./TransactionList";
-import AnimatedNumber from "../../ui/AnimatedNumber";
 
-export default function TransactionSummary({
-  transactions,
-}: {
-  transactions: Transaction[];
-}) {
+import AnimatedNumber from "../../ui/AnimatedNumber";
+import { useTransactions } from "./TransactionContext";
+
+export default function TransactionSummary() {
+  const { transactions, loading, error } = useTransactions();
   const income = transactions
     .filter((t) => t.transactionType === "INCOME")
     .reduce((sum, t) => sum + Number(t.amount), 0);
@@ -13,6 +11,13 @@ export default function TransactionSummary({
     .filter((t) => t.transactionType === "EXPENSE")
     .reduce((sum, t) => sum + Number(t.amount), 0);
   const balance = income - expenses;
+
+  if (loading) {
+    return <div className="text-center py-8">Loading...</div>;
+  }
+  if (error) {
+    return <div className="text-center text-red-500 py-8">{error}</div>;
+  }
 
   return (
     <div className="flex flex-col md:flex-row gap-6 justify-center mb-10 animate-fade-in">

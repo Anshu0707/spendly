@@ -1,23 +1,12 @@
-import { useEffect, useState } from "react";
-import { ArrowTrendingDownIcon } from "@heroicons/react/24/outline";
+import { useTransactions } from "../features/transactions/TransactionContext";
 import {
+  ArrowTrendingDownIcon,
   BriefcaseIcon,
   BuildingOffice2Icon,
   TruckIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
 import { GiHamburger } from "react-icons/gi";
-
-const apiUrl = import.meta.env.VITE_API_URL;
-
-export type Transaction = {
-  id?: number;
-  amount: number;
-  transactionType: string;
-  category: string;
-  categoryType?: string;
-  date: string;
-};
 
 function getCategoryIcon(category: string) {
   switch (category.toUpperCase()) {
@@ -37,24 +26,10 @@ function getCategoryIcon(category: string) {
 }
 
 export default function ExpensesPage() {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch(`${apiUrl}/api/transactions`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch transactions");
-        return res.json();
-      })
-      .then((data) => {
-        setTransactions(
-          data.filter((tx: Transaction) => tx.transactionType === "EXPENSE")
-        );
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, []);
+  const { transactions, loading, error } = useTransactions();
+  const expenseTransactions = transactions.filter(
+    (tx) => tx.transactionType === "EXPENSE"
+  );
 
   return (
     <div className="w-full px-4 pt-3 pb-4 h-screen flex flex-col overflow-hidden">
@@ -65,7 +40,7 @@ export default function ExpensesPage() {
         <div className="text-center text-gray-300 py-8">Loading...</div>
       ) : error ? (
         <div className="text-center text-red-500 py-8">{error}</div>
-      ) : transactions.length === 0 ? (
+      ) : expenseTransactions.length === 0 ? (
         <div className="text-center text-gray-400 py-8">
           No expense transactions found.
         </div>
@@ -87,7 +62,7 @@ export default function ExpensesPage() {
             </div>
           </div>
           <ul className="flex flex-col gap-0 w-full max-w-none">
-            {transactions.map((tx, idx) => (
+            {expenseTransactions.map((tx, idx) => (
               <li
                 key={idx}
                 className="bg-gradient-to-r from-gray-800/80 to-gray-900/80 border border-pink-500/20 p-6 flex flex-col md:flex-row md:items-center md:justify-between shadow-2xl break-words w-full shadow-white/10"

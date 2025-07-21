@@ -1,22 +1,11 @@
-import { useEffect, useState } from "react";
-import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
+import { useTransactions } from "../features/transactions/TransactionContext";
 import {
+  CurrencyDollarIcon,
   BriefcaseIcon,
   BuildingOffice2Icon,
   TruckIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
-
-const apiUrl = import.meta.env.VITE_API_URL;
-
-export type Transaction = {
-  id?: number;
-  amount: number;
-  transactionType: string;
-  category: string;
-  categoryType?: string;
-  date: string;
-};
 
 function getCategoryIcon(category: string) {
   switch (category.toUpperCase()) {
@@ -36,29 +25,13 @@ function getCategoryIcon(category: string) {
 }
 
 export default function IncomePage() {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch(`${apiUrl}/api/transactions`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch transactions");
-        return res.json();
-      })
-      .then((data) => {
-        setTransactions(
-          data.filter(
-            (tx: Transaction) =>
-              tx.transactionType === "INCOME" ||
-              (tx.categoryType === "SALARY" &&
-                !["INCOME", "EXPENSE"].includes(tx.transactionType))
-          )
-        );
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, []);
+  const { transactions, loading, error } = useTransactions();
+  const incomeTransactions = transactions.filter(
+    (tx) =>
+      tx.transactionType === "INCOME" ||
+      (tx.categoryType === "SALARY" &&
+        !["INCOME", "EXPENSE"].includes(tx.transactionType))
+  );
 
   return (
     <div className="w-full px-4 pt-3 pb-4 h-screen flex flex-col overflow-hidden">
@@ -69,7 +42,7 @@ export default function IncomePage() {
         <div className="text-center text-gray-300 py-8">Loading...</div>
       ) : error ? (
         <div className="text-center text-red-500 py-8">{error}</div>
-      ) : transactions.length === 0 ? (
+      ) : incomeTransactions.length === 0 ? (
         <div className="text-center text-gray-400 py-8">
           No income transactions found.
         </div>
@@ -91,7 +64,7 @@ export default function IncomePage() {
             </div>
           </div>
           <ul className="flex flex-col gap-0 w-full max-w-none">
-            {transactions.map((tx, idx) => (
+            {incomeTransactions.map((tx, idx) => (
               <li
                 key={idx}
                 className="bg-gradient-to-r from-gray-800/80 to-gray-900/80 border border-green-500/20 p-6 flex flex-col md:flex-row md:items-center md:justify-between shadow-2xl break-words w-full shadow-white/10"

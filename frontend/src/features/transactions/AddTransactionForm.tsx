@@ -1,6 +1,8 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useTransactions } from "./TransactionContext"; // <-- Import the context hook
+
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const CATEGORY_TYPE_OPTIONS = [
@@ -20,14 +22,13 @@ const initialForm = {
 };
 
 export default function AddTransactionForm({
-  onAdd,
   headerClassName,
   title,
 }: {
-  onAdd?: () => void;
   headerClassName?: string;
   title?: string;
 }) {
+  const { refresh } = useTransactions(); // <-- Use the context refresh
   const [form, setForm] = useState(initialForm);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -80,7 +81,7 @@ export default function AddTransactionForm({
       if (!res.ok) throw new Error("Failed to add transaction");
       setSuccess("Transaction added!");
       setForm(initialForm);
-      if (onAdd) onAdd();
+      refresh(); // <-- Refresh the context after successful add
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Unknown error");
     } finally {

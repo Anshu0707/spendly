@@ -1,16 +1,13 @@
-import TransactionList from "../features/transactions/TransactionList";
-import type { Transaction } from "../features/transactions/TransactionList";
+import { useState, useCallback } from "react";
+import { useTransactions } from "../features/transactions/TransactionContext";
 import AddTransactionForm from "../features/transactions/AddTransactionForm";
-import ImportExportButtons from "../features/transactions/ImportExportButtons";
 import TransactionSummary from "../features/transactions/TransactionSummary";
-import { useState } from "react";
-import { useCallback } from "react";
-
+import TransactionList from "../features/transactions/TransactionList";
+import ImportExportButtons from "../features/transactions/ImportExportButtons";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function TransactionsPage() {
-  const [refresh, setRefresh] = useState(0);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const { refresh } = useTransactions();
   const [clearing, setClearing] = useState(false);
   const handleClearAll = useCallback(async () => {
     setClearing(true);
@@ -19,26 +16,22 @@ export default function TransactionsPage() {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to clear transactions");
-      setRefresh((r) => r + 1);
+      refresh();
     } catch {
       alert("Failed to clear transactions");
     } finally {
       setClearing(false);
     }
-  }, []);
+  }, [refresh]);
 
   return (
     <section className="w-full max-w-6xl mx-auto flex flex-col md:flex-row gap-8 items-stretch pt-8">
       {/* Left: Form + Summary */}
       <div className="flex-1 flex flex-col gap-8 min-w-[340px] h-full justify-start">
         <div className="w-full">
-          <AddTransactionForm
-            onAdd={() => setRefresh((r) => r + 1)}
-            headerClassName="text-2xl font-bold mb-6 text-pink-500 text-center"
-            title="Transactions"
-          />
+          <AddTransactionForm />
         </div>
-        <TransactionSummary transactions={transactions} />
+        <TransactionSummary />
       </div>
       {/* Right: Transaction List */}
       <div className="flex-1 flex flex-col gap-2 min-w-[340px] h-full justify-start">
@@ -48,7 +41,7 @@ export default function TransactionsPage() {
               Quick View
             </h2>
             <div className="flex-1">
-              <TransactionList key={refresh} onData={setTransactions} />
+              <TransactionList />
             </div>
           </div>
         </div>
@@ -60,7 +53,7 @@ export default function TransactionsPage() {
           {clearing ? "Clearing..." : "Clear All Transactions"}
         </button>
         <div className="flex flex-col gap-2 mt-6">
-          <ImportExportButtons onImport={() => setRefresh((r) => r + 1)} />
+          <ImportExportButtons />
         </div>
       </div>
     </section>

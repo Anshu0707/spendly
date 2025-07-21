@@ -1,38 +1,7 @@
-import { useEffect, useState } from "react";
-export type { Transaction };
-const apiUrl = import.meta.env.VITE_API_URL;
+import { useTransactions } from "./TransactionContext";
 
-type Transaction = {
-  id?: number;
-  amount: number;
-  transactionType: string;
-  category: string;
-  categoryType?: string;
-  date: string;
-};
-
-export default function TransactionList({
-  onData,
-}: {
-  onData?: (txs: Transaction[]) => void;
-}) {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch(`${apiUrl}/api/transactions`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch transactions");
-        return res.json();
-      })
-      .then((data) => {
-        setTransactions(data);
-        if (onData) onData(data);
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, [onData]);
+export default function TransactionList() {
+  const { transactions, loading, error } = useTransactions();
 
   if (loading) return <div className="text-center py-8">Loading...</div>;
   if (error)

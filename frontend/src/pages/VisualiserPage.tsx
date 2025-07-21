@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useTransactions } from "../contexts/TransactionContext";
 import {
   Chart as ChartJS,
@@ -14,6 +14,7 @@ import {
   Filler,
 } from "chart.js";
 import { Line, Bar, Doughnut } from "react-chartjs-2";
+import { ChartBarIcon } from "@heroicons/react/24/solid";
 
 ChartJS.register(
   CategoryScale,
@@ -29,14 +30,20 @@ ChartJS.register(
 );
 
 export default function VisualiserPage() {
-  const { transactions, loading, error } = useTransactions();
+  const { allTransactions, allLoading, allError, fetchAllTransactions } =
+    useTransactions();
   const [selectedPeriod, setSelectedPeriod] = useState("month");
   const [selectedChart, setSelectedChart] = useState("overview");
+
+  useEffect(() => {
+    fetchAllTransactions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Data processing functions with useMemo - must be before loading check
   const filteredTransactions = useMemo(() => {
     const now = new Date();
-    return transactions.filter((tx) => {
+    return allTransactions.filter((tx) => {
       const txDate = new Date(tx.date);
       switch (selectedPeriod) {
         case "week": {
@@ -63,7 +70,7 @@ export default function VisualiserPage() {
           return true;
       }
     });
-  }, [transactions, selectedPeriod]);
+  }, [allTransactions, selectedPeriod]);
 
   const monthlyData = useMemo(() => {
     const months = [
@@ -177,17 +184,17 @@ export default function VisualiserPage() {
     return Array.from(monthlyData.entries());
   }, [filteredTransactions, selectedPeriod]);
 
-  if (loading) {
+  if (allLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-violet-500"></div>
       </div>
     );
   }
-  if (error) {
+  if (allError) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="text-red-500 text-xl">{error}</div>
+        <div className="text-red-500 text-xl">{allError}</div>
       </div>
     );
   }
@@ -344,8 +351,11 @@ export default function VisualiserPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 overflow-y-auto transaction-list-scroll my-8">
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-pink-400 to-orange-400 mb-4">
-          📊 Financial Analytics
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-4 flex items-center justify-center gap-3">
+          <ChartBarIcon className="w-12 h-12 md:w-16 md:h-16 text-violet-400 drop-shadow-lg" />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-pink-400 to-orange-400">
+            Financial Analytics
+          </span>
         </h1>
         <p className="text-xl text-gray-300 font-medium">
           Discover insights, track trends, and master your finances

@@ -11,6 +11,7 @@ A modern, elegant expense tracking application built with **React**, **TypeScrip
 - 📊 **Data Visualization** – Clean animated UI to explore spending trends
 - 🧱 **Responsive Design** – Mobile-first, Tailwind-powered layout
 - 🛡️ **Robust Error Handling** – Graceful UX under failure conditions
+- 🌀 **Modern Animations & Loaders** – Framer Motion-powered row entry, sticky glassmorphic headers, animated empty states, topbar, and contextual spinners for smooth, immersive feedback
 
 ---
 

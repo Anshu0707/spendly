@@ -26,7 +26,7 @@ export default function TransactionSummary() {
             🟢
           </span>
           <div className="font-extrabold text-base tracking-wide uppercase text-gray-900 drop-shadow-sm min-h-[28px] flex items-center justify-center">
-            Total Income
+            Incomes
           </div>
           <div className="text-2xl font-extrabold text-green-600 drop-shadow-md mt-2 animate-pulse flex items-end justify-center min-h-[36px]">
             <AnimatedNumber value={income} />
@@ -39,7 +39,7 @@ export default function TransactionSummary() {
             💸
           </span>
           <div className="font-extrabold text-base tracking-wide uppercase text-gray-900 drop-shadow-sm min-h-[28px] flex items-center justify-center">
-            Total Expenses
+            Expenses
           </div>
           <div className="text-2xl font-extrabold text-pink-600 drop-shadow-md mt-2 animate-pulse flex items-end justify-center min-h-[36px]">
             <AnimatedNumber value={expenses} />

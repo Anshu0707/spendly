@@ -4,10 +4,11 @@ import AddTransactionForm from "../components/transactions/AddTransactionForm";
 import TransactionSummary from "../components/transactions//TransactionSummary";
 import { TransactionList } from "../components/transactions//TransactionList";
 import ImportExportButtons from "../components/transactions//ImportExportButtons";
+import { motion } from "framer-motion";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function TransactionsPage() {
-  const { transactions, refresh } = useTransactions();
+  const { transactions, refresh, loading } = useTransactions();
   const [clearing, setClearing] = useState(false);
   const handleClearAll = useCallback(async () => {
     setClearing(true);
@@ -29,9 +30,15 @@ export default function TransactionsPage() {
       {/* Left: Form + Summary */}
       <div className="flex-1 flex flex-col gap-8 min-w-[340px] h-full justify-start">
         <div className="w-full">
-          <AddTransactionForm />
+          {loading ? (
+            <div className="flex items-center justify-center h-80">
+              <span className="inline-block w-16 h-16 border-4 border-violet-400 border-t-transparent rounded-full animate-spin"></span>
+            </div>
+          ) : (
+            <AddTransactionForm />
+          )}
         </div>
-        <TransactionSummary />
+        {!loading && <TransactionSummary />}
       </div>
       {/* Right: Transaction List */}
       <div className="flex-1 flex flex-col gap-2 min-w-[340px] h-full justify-start">
@@ -41,11 +48,40 @@ export default function TransactionsPage() {
               Quick View
             </h2>
             <div className="flex-1">
-              <TransactionList
-                transactions={transactions}
-                colorClass="border-violet-500"
-                maxHeight="360px"
-              />
+              {loading ? (
+                <div className="flex items-center justify-center h-80 w-full">
+                  <span className="inline-block w-16 h-16 border-4 border-violet-400 border-t-transparent rounded-full animate-spin"></span>
+                </div>
+              ) : transactions.length === 0 ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="flex flex-col items-center justify-center h-72"
+                >
+                  <svg width="80" height="80" fill="none" viewBox="0 0 80 80">
+                    <rect width="80" height="80" rx="20" fill="#f3e8ff" />
+                    <path
+                      d="M24 40h32M40 24v32"
+                      stroke="#a78bfa"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <div className="mt-6 text-lg text-violet-400 font-semibold">
+                    No transactions yet
+                  </div>
+                  <div className="text-gray-400">
+                    Add your first transaction to get started!
+                  </div>
+                </motion.div>
+              ) : (
+                <TransactionList
+                  transactions={transactions}
+                  colorClass="border-violet-500"
+                  maxHeight="360px"
+                />
+              )}
             </div>
           </div>
         </div>

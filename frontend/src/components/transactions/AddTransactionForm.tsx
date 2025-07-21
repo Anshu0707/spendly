@@ -183,6 +183,7 @@ export default function AddTransactionForm({
             className="w-full border border-violet-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white text-gray-900 shadow-md transition-all duration-200 focus:shadow-pink-200/60"
             wrapperClassName="w-full"
             required
+            popperClassName="z-50"
           />
         </div>
       </div>

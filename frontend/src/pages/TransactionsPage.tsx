@@ -1,9 +1,9 @@
 import { useState, useCallback } from "react";
 import { useTransactions } from "../contexts/TransactionContext";
-import AddTransactionForm from "../components/transactions/AddTransactionForm";
-import TransactionSummary from "../components/transactions//TransactionSummary";
-import { TransactionList } from "../components/transactions//TransactionList";
-import ImportExportButtons from "../components/transactions//ImportExportButtons";
+import AddTransactionForm from "../components/Transactions/AddTransactionForm";
+import TransactionSummary from "../components/Transactions//TransactionSummary";
+import { TransactionList } from "../components/Transactions//TransactionList";
+import ImportExportButtons from "../components/Transactions//ImportExportButtons";
 import { motion } from "framer-motion";
 const apiUrl = import.meta.env.VITE_API_URL;
 

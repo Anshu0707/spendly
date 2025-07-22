@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useTransactions } from "../contexts/TransactionContext";
 import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
-import { TransactionList } from "../components/transactions/TransactionList";
+import { TransactionList } from "../components/Transactions/TransactionList";
 import type { Transaction } from "../contexts/TransactionContext";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 

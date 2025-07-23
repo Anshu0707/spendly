@@ -1,8 +1,8 @@
-import type { Transaction } from "../../contexts/TransactionContext";
+import type { Transaction } from "../../types/transaction";
 import { TransactionRow } from "./TransactionRow";
 import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
-import { useTransactions } from "../../contexts/TransactionContext";
+import { useTransactions } from "../../hooks/useTransactions";
 
 type TransactionListProps = {
   transactions: Transaction[];

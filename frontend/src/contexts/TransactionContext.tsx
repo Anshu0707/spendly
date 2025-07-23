@@ -1,6 +1,5 @@
 import {
   createContext,
-  useContext,
   useEffect,
   useState,
   useCallback,
@@ -9,17 +8,9 @@ import {
 import type { ReactNode } from "react";
 import topbar from "topbar";
 import "nprogress/nprogress.css";
+import type { Transaction } from "@/types/transaction";
 
 const apiUrl = import.meta.env.VITE_API_URL;
-
-export type Transaction = {
-  id?: number;
-  amount: number;
-  transactionType: string;
-  category: string;
-  categoryType?: string;
-  date: string;
-};
 
 type TransactionContextType = {
   transactions: Transaction[];
@@ -88,8 +79,12 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
         setTransactions((prev) =>
           reset ? newTransactions : [...prev, ...newTransactions]
         );
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }
       } finally {
         setLoading(false);
         topbar.hide();
@@ -109,8 +104,12 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
 
       const data = await res.json();
       setAllTransactions(Array.isArray(data) ? data : data.content || []);
-    } catch (err: any) {
-      setAllError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setAllError(err.message);
+      } else {
+        setAllError("An unknown error occurred");
+      }
     } finally {
       setAllLoading(false);
       topbar.hide();
@@ -166,9 +165,4 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function useTransactions() {
-  const ctx = useContext(TransactionContext);
-  if (!ctx)
-    throw new Error("useTransactions must be used within TransactionProvider");
-  return ctx;
-}
+export { TransactionContext, type TransactionContextType };

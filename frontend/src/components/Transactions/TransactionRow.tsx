@@ -1,4 +1,4 @@
-import type { Transaction } from "../../contexts/TransactionContext";
+import type { Transaction } from "../../types/transaction";
 import { CategoryIcon } from "./CategoryIcon";
 import { motion } from "framer-motion";
 

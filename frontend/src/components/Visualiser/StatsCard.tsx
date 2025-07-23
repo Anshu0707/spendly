@@ -11,7 +11,7 @@ export default function StatCard({ label, value, className }: StatCardProps) {
   return (
     <div
       className={clsx(
-        "flex items-center justify-between p-6 rounded-lg shadow-md",
+        "flex items-center justify-between p-3 rounded-lg shadow-md",
         className
       )}
     >

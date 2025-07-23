@@ -7,16 +7,13 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import { filterByPeriod } from "../../../utils/filterByPeriod";
+import { filterByPeriod } from "@/utils/filterByPeriod";
 import type { Transaction } from "@/types/transaction";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 type Props = {
   transactions: Transaction[];
   selectedPeriod: string;
-  showIncome: boolean;
-  showExpense: boolean;
-  onToggle: (type: "INCOME" | "EXPENSE") => void;
 };
 
 const COLORS = [
@@ -37,28 +34,38 @@ type DataItem = {
 export default function CategoryAnalysisChart({
   transactions,
   selectedPeriod,
-  showIncome,
-  showExpense,
-  onToggle,
 }: Props) {
-  const filtered = useMemo(
-    () => filterByPeriod(transactions, selectedPeriod),
-    [transactions, selectedPeriod]
-  );
+  const [showIncome, setShowIncome] = useState(true);
+  const [showExpense, setShowExpense] = useState(true);
 
-  const expenseData: DataItem[] = [];
-  const incomeData: DataItem[] = [];
+  const toggleType = (type: "INCOME" | "EXPENSE") => {
+    type === "INCOME"
+      ? setShowIncome((prev) => !prev)
+      : setShowExpense((prev) => !prev);
+  };
 
-  for (const tx of filtered) {
-    const target = tx.transactionType === "INCOME" ? incomeData : expenseData;
-    const existing = target.find((item) => item.name === tx.category);
+  // FIXED: Removed future-date filtering to match IncomeVsExpenseChart
+  const filtered = useMemo(() => {
+    return filterByPeriod(transactions, selectedPeriod);
+  }, [transactions, selectedPeriod]);
 
-    if (existing) {
-      existing.value += tx.amount;
-    } else {
-      target.push({ name: tx.category, value: tx.amount });
+  const { incomeData, expenseData } = useMemo(() => {
+    const incomeData: DataItem[] = [];
+    const expenseData: DataItem[] = [];
+
+    for (const tx of filtered) {
+      const target = tx.transactionType === "INCOME" ? incomeData : expenseData;
+      const existing = target.find((item) => item.name === tx.category);
+
+      if (existing) {
+        existing.value += tx.amount;
+      } else {
+        target.push({ name: tx.category, value: tx.amount });
+      }
     }
-  }
+
+    return { incomeData, expenseData };
+  }, [filtered]);
 
   const pieData = [
     {
@@ -80,7 +87,7 @@ export default function CategoryAnalysisChart({
       {pieData.map(({ label, data, visible, type }) => (
         <div key={label}>
           <h3
-            onClick={() => onToggle(type)}
+            onClick={() => toggleType(type)}
             className={`text-lg font-semibold mb-2 cursor-pointer transition ${
               visible
                 ? "text-white hover:text-violet-300"

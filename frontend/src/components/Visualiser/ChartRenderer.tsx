@@ -9,66 +9,49 @@ type Props = {
   selectedChart: string;
   selectedPeriod: string;
   transactions: Transaction[];
-  showIncome?: boolean;
-  showExpense?: boolean;
-  onToggle?: (type: "INCOME" | "EXPENSE") => void;
 };
 
 export default function ChartRenderer({
   selectedChart,
   selectedPeriod,
   transactions,
-  showIncome,
-  showExpense,
-  onToggle,
 }: Props) {
-  switch (selectedChart) {
-    case "Income vs Expense":
-      // ✅ Ensure required props are defined
-      if (
-        typeof showIncome === "undefined" ||
-        typeof showExpense === "undefined" ||
-        typeof onToggle !== "function"
-      ) {
-        console.error("ChartRenderer: Missing props for IncomeVsExpenseChart.");
-        return null;
-      }
-
-      return (
-        <IncomeVsExpenseChart
-          transactions={transactions}
-          selectedPeriod={selectedPeriod}
-          showIncome={showIncome}
-          showExpense={showExpense}
-          onToggle={onToggle}
-        />
-      );
-
-    case "Category Analysis":
-      return (
-        <CategoryAnalysisChart
-          transactions={transactions}
-          selectedPeriod={selectedPeriod}
-        />
-      );
-
-    case "Balance Distribution":
-      return (
-        <BalanceDistributionChart
-          transactions={transactions}
-          selectedPeriod={selectedPeriod}
-        />
-      );
-
-    case "Trend Line":
-      return (
-        <TrendLineChart
-          transactions={transactions}
-          selectedPeriod={selectedPeriod}
-        />
-      );
-
-    default:
-      return null;
-  }
+  return (
+    <div className="w-full min-h-[420px] mb-6">
+      {(() => {
+        switch (selectedChart) {
+          case "Income vs Expense":
+            return (
+              <IncomeVsExpenseChart
+                transactions={transactions}
+                selectedPeriod={selectedPeriod}
+              />
+            );
+          case "Category Analysis":
+            return (
+              <CategoryAnalysisChart
+                transactions={transactions}
+                selectedPeriod={selectedPeriod}
+              />
+            );
+          case "Balance Distribution":
+            return (
+              <BalanceDistributionChart
+                transactions={transactions}
+                selectedPeriod={selectedPeriod}
+              />
+            );
+          case "Trend Line":
+            return (
+              <TrendLineChart
+                transactions={transactions}
+                selectedPeriod={selectedPeriod}
+              />
+            );
+          default:
+            return null;
+        }
+      })()}
+    </div>
+  );
 }

@@ -15,22 +15,12 @@ export default function VisualiserPage() {
   const { allTransactions, allLoading, allError, fetchAllTransactions } =
     useTransactions();
 
-  const [selectedChart, setSelectedChart] = useState("overview");
-  const [selectedPeriod, setSelectedPeriod] = useState("month");
-  const [showIncome, setShowIncome] = useState(true);
-  const [showExpense, setShowExpense] = useState(true);
+  const [selectedChart, setSelectedChart] = useState("Income vs Expense");
+  const [selectedPeriod, setSelectedPeriod] = useState("Month");
 
   useEffect(() => {
     fetchAllTransactions();
   }, [fetchAllTransactions]);
-
-  const handleToggle = (type: "INCOME" | "EXPENSE") => {
-    if (type === "INCOME") {
-      setShowIncome((prev) => !prev);
-    } else {
-      setShowExpense((prev) => !prev);
-    }
-  };
 
   if (allLoading) {
     return (
@@ -66,26 +56,25 @@ export default function VisualiserPage() {
 
       <QuickStatsGrid transactions={allTransactions} />
 
-      <ChartNavigation
-        selectedChart={selectedChart}
-        setSelectedChart={setSelectedChart}
-      />
+      {/* CHART SECTION */}
+      <div className="bg-gradient-to-br from-slate-800/40 to-purple-800/30 backdrop-blur-md rounded-2xl border border-violet-600/30 p-2 shadow-lg space-y-6 my-4">
+        <ChartNavigation
+          selectedChart={selectedChart}
+          setSelectedChart={setSelectedChart}
+        />
 
-      <ChartRenderer
-        selectedChart={selectedChart}
-        selectedPeriod={selectedPeriod}
-        transactions={allTransactions}
-        showIncome={showIncome}
-        showExpense={showExpense}
-        onToggle={handleToggle}
-      />
+        <ChartRenderer
+          selectedChart={selectedChart}
+          selectedPeriod={selectedPeriod}
+          transactions={allTransactions}
+        />
 
+        <PeriodSelector
+          selectedPeriod={selectedPeriod}
+          setSelectedPeriod={setSelectedPeriod}
+        />
+      </div>
       <InsightPanel transactions={allTransactions} />
-
-      <PeriodSelector
-        selectedPeriod={selectedPeriod}
-        setSelectedPeriod={setSelectedPeriod}
-      />
     </div>
   );
 }

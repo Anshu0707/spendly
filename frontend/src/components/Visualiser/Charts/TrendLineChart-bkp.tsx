@@ -1,4 +1,4 @@
-// src/components/Visualiser/Charts/TrendLineChart.tsx
+// src/components/visualiser/charts/TrendLineChart.tsx
 import {
   ResponsiveContainer,
   LineChart,
@@ -6,14 +6,11 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
 } from "recharts";
 import { format } from "date-fns";
 import { filterByPeriod } from "@/utils/filterByPeriod";
 import type { Transaction } from "@/types/transaction";
-import { useMemo } from "react";
-import { useToggleIncomeExpense } from "@/hooks/useToggleIncomeExpense";
-import IncomeExpenseToggle from "../../Visualiser/Toggle/IncomeExpenseToggle";
+import { useMemo, useState } from "react";
 
 type Props = {
   transactions: Transaction[];
@@ -30,7 +27,14 @@ export default function TrendLineChart({
   transactions,
   selectedPeriod,
 }: Props) {
-  const { showIncome, showExpense, toggleType } = useToggleIncomeExpense();
+  const [showIncome, setShowIncome] = useState(true);
+  const [showExpense, setShowExpense] = useState(true);
+
+  const toggleType = (type: "INCOME" | "EXPENSE") => {
+    type === "INCOME"
+      ? setShowIncome((prev) => !prev)
+      : setShowExpense((prev) => !prev);
+  };
 
   const filtered = useMemo(
     () => filterByPeriod(transactions, selectedPeriod),
@@ -72,12 +76,27 @@ export default function TrendLineChart({
 
   return (
     <div className="w-full">
-      <div className="mb-4 ml-2">
-        <IncomeExpenseToggle
-          showIncome={showIncome}
-          showExpense={showExpense}
-          toggleType={toggleType}
-        />
+      <div className="flex gap-6 mb-2 ml-2">
+        <span
+          className={`cursor-pointer transition ${
+            showIncome
+              ? "text-green-500 hover:text-green-400"
+              : "line-through text-gray-500 hover:text-white"
+          }`}
+          onClick={() => toggleType("INCOME")}
+        >
+          Income
+        </span>
+        <span
+          className={`cursor-pointer transition ${
+            showExpense
+              ? "text-red-400 hover:text-red-300"
+              : "line-through text-gray-500 hover:text-white"
+          }`}
+          onClick={() => toggleType("EXPENSE")}
+        >
+          Expense
+        </span>
       </div>
 
       {hasVisibleData ? (
@@ -91,7 +110,6 @@ export default function TrendLineChart({
             <Tooltip
               labelFormatter={(label) => format(new Date(label), "dd MMM yyyy")}
             />
-            <Legend />
             {showIncome && (
               <Line
                 type="monotone"

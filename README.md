@@ -25,13 +25,13 @@ The backend of this project strictly follows the **SOLID principles** of object-
 - ✅ Maintainability
 - ✅ Readability
 - ✅ Testability
-- ✅ Performance (with paginated APIs and optimized frontend state)
+- ✅ Performance 
 
 The frontend of this project follows the **DRY principle** of frontend development to ensure:
 
 - ✅ Reusable UI Components
 - ✅ Abstraction
-- ✅ State Management (Zustand)
+- ✅ Global State Management (Zustand)
 - ✅ Custom Hooks
 - ✅ Robust Error Handling
 

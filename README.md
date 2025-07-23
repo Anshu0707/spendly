@@ -95,7 +95,7 @@ The frontend of this project follows the **DRY principle** of frontend developme
 ## Previews
 
 - **Home Page**
-  <img width="2559" height="1042" alt="Screenshot 2025-07-22 015632" src="https://github.com/user-attachments/assets/bca2187e-9949-4ef5-baeb-2dd12c19b5c2" />
+<img width="2559" height="1148" alt="Screenshot 2025-07-24 025735" src="https://github.com/user-attachments/assets/471b83be-3d45-45e9-b88f-33271b01e846" />
 
 ---
 

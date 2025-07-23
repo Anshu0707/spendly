@@ -1,11 +1,4 @@
-import {
-  Lightbulb,
-  Target,
-  ThumbsUp,
-  PiggyBank,
-  Utensils,
-  ListChecks,
-} from "lucide-react";
+import { Lightbulb, Target, ThumbsUp, ListChecks } from "lucide-react";
 import { getInsights } from "@/utils/getInsights";
 import { getRecommendations } from "@/utils/getRecommendations";
 import type { Transaction } from "@/types/transaction";

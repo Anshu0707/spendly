@@ -17,6 +17,15 @@ export default {
       backdropBlur: {
         xs: "2px",
       },
+      animation: {
+        "ascii-scroll": "asciiScroll 6s linear infinite",
+      },
+      keyframes: {
+        asciiScroll: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(100%)" },
+        },
+      },
     },
   },
   plugins: [],

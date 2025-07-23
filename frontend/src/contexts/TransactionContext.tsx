@@ -99,17 +99,35 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
     topbar.show();
 
     try {
-      const res = await fetch(`${apiUrl}/api/transactions`);
-      if (!res.ok) throw new Error("Failed to fetch all transactions");
+      let page = 0;
+      const size = 100; // fetch in batches of 100
+      let hasNext = true;
+      const all: Transaction[] = [];
 
-      const data = await res.json();
-      setAllTransactions(Array.isArray(data) ? data : data.content || []);
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setAllError(err.message);
-      } else {
-        setAllError("An unknown error occurred");
+      while (hasNext) {
+        const res = await fetch(
+          `${apiUrl}/api/transactions?page=${page}&size=${size}`
+        );
+        if (!res.ok) throw new Error(`Failed to fetch page ${page}`);
+
+        const data = await res.json();
+
+        const currentPageData: Transaction[] = Array.isArray(data)
+          ? data
+          : data.content || [];
+
+        all.push(...currentPageData);
+
+        const totalPages = data.totalPages ?? 1;
+        page += 1;
+        hasNext = page < totalPages;
       }
+
+      setAllTransactions(all);
+    } catch (err: unknown) {
+      setAllError(
+        err instanceof Error ? err.message : "An unknown error occurred"
+      );
     } finally {
       setAllLoading(false);
       topbar.hide();

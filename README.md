@@ -110,10 +110,11 @@ The frontend of this project follows the **DRY principle** of frontend developme
 ---
 
 - **Visualiser Page**
-  <img width="2505" height="1420" alt="Screenshot 2025-07-22 015955" src="https://github.com/user-attachments/assets/c957db83-831d-466c-a4a6-9bebdf63186a" />
+<img width="2559" height="1278" alt="Screenshot 2025-07-24 022740" src="https://github.com/user-attachments/assets/af2eae79-50de-42b3-9b1f-90505d426469" />
+  
 
 - **Insights Section**
-  <img width="2064" height="484" alt="Screenshot 2025-07-22 020015" src="https://github.com/user-attachments/assets/c754cad6-45d7-48a3-9694-915c3dd23ff9" />
+<img width="2078" height="314" alt="Screenshot 2025-07-24 022757" src="https://github.com/user-attachments/assets/00f52cc5-b608-4514-b3cf-c3f0150d080a" />
 
 ---
 

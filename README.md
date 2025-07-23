@@ -9,7 +9,6 @@ A modern and elegant expense tracking application built with **React**, **TypeSc
 - 📌 **Transaction Management** – Add, view, and categorize income/expenses
 - 📂 **CSV/Text/PDF Import & Export** – Import/export transaction data effortlessly for offline access
 - 📊 **Data Visualization** – Clean animated UI to explore spending patterns
-- 🧱 **Responsive Design** – Mobile-first, Tailwind-powered layout
 - 🛡️ **Robust Error Handling** – Seamless user experience under failure conditions
 - ⚡ **Infinite Scroll & Server-side Pagination** – Lightning-fast UI, even with large datasets
 - 🌀 **Modern Animations & Loaders** – Framer Motion-powered animations and contextual spinners for smooth, immersive feedback
@@ -20,7 +19,7 @@ A modern and elegant expense tracking application built with **React**, **TypeSc
 
 ## 🧠 Design Philosophy
 
-This project strictly follows the **SOLID principles** of object-oriented programming to ensure:
+The backend of this project strictly follows the **SOLID principles** of object-oriented programming to ensure:
 
 - ✅ Scalability
 - ✅ Maintainability
@@ -28,16 +27,24 @@ This project strictly follows the **SOLID principles** of object-oriented progra
 - ✅ Testability
 - ✅ Performance (with paginated APIs and optimized frontend state)
 
+The frontend of this project follows the **DRY principle** of frontend development to ensure:
+
+- ✅ Reusable UI Components
+- ✅ Abstraction
+- ✅ State Management (Zustand)
+- ✅ Custom Hooks
+- ✅ Robust Error Handling
+
 ---
 
 ## 🔧 Tech Stack
 
-| Layer         | Tech                                                           |
-| ------------- | -------------------------------------------------------------- |
-| **Frontend**  | React, TypeScript, Tailwind CSS, Framer Motion, Topbar         |
-| **Backend**   | Spring Boot (Java), REST APIs                                  |
-| **Database**  | PostgreSQL (production), H2 (development)                      |
-| **Utilities** | CSV/Text File I/O for import/export with PDF export supported. |
+| Layer         | Tech                                                                       |
+| ------------- | -------------------------------------------------------------------------- |
+| **Frontend**  | React, TypeScript, Tailwind CSS, Zustand, Framer Motion, Topbar , Recharts |
+| **Backend**   | Spring Boot (Java), REST APIs                                              |
+| **Database**  | PostgreSQL (production), H2 (development)                                  |
+| **Utilities** | CSV/Text File I/O for import/export with PDF export supported.             |
 
 ---
 
@@ -88,25 +95,25 @@ This project strictly follows the **SOLID principles** of object-oriented progra
 ## Previews
 
 - **Home Page**
-<img width="2559" height="1042" alt="Screenshot 2025-07-22 015632" src="https://github.com/user-attachments/assets/bca2187e-9949-4ef5-baeb-2dd12c19b5c2" />
+  <img width="2559" height="1042" alt="Screenshot 2025-07-22 015632" src="https://github.com/user-attachments/assets/bca2187e-9949-4ef5-baeb-2dd12c19b5c2" />
 
 ---
 
 - **Income Page**
-<img width="2559" height="1181" alt="Screenshot 2025-07-22 020441" src="https://github.com/user-attachments/assets/3e72d9e7-bc43-4c43-a0e0-03463d046768" />
+  <img width="2559" height="1181" alt="Screenshot 2025-07-22 020441" src="https://github.com/user-attachments/assets/3e72d9e7-bc43-4c43-a0e0-03463d046768" />
 
 ---
 
 - **Expense Page**
-<img width="2507" height="1439" alt="Screenshot 2025-07-22 015717" src="https://github.com/user-attachments/assets/43fbc68b-ac67-4965-b0ad-416e1bb77960" />
+  <img width="2507" height="1439" alt="Screenshot 2025-07-22 015717" src="https://github.com/user-attachments/assets/43fbc68b-ac67-4965-b0ad-416e1bb77960" />
 
 ---
 
 - **Visualiser Page**
-<img width="2505" height="1420" alt="Screenshot 2025-07-22 015955" src="https://github.com/user-attachments/assets/c957db83-831d-466c-a4a6-9bebdf63186a" />
+  <img width="2505" height="1420" alt="Screenshot 2025-07-22 015955" src="https://github.com/user-attachments/assets/c957db83-831d-466c-a4a6-9bebdf63186a" />
 
 - **Insights Section**
-<img width="2064" height="484" alt="Screenshot 2025-07-22 020015" src="https://github.com/user-attachments/assets/c754cad6-45d7-48a3-9694-915c3dd23ff9" />
+  <img width="2064" height="484" alt="Screenshot 2025-07-22 020015" src="https://github.com/user-attachments/assets/c754cad6-45d7-48a3-9694-915c3dd23ff9" />
 
 ---
 

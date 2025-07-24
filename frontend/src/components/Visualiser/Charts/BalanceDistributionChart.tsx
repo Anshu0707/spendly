@@ -86,7 +86,7 @@ export default function BalanceDistributionChart({
             showExpense={showExpense}
             toggleType={toggleType}
           />
-          <TooltipIcon text="Include income or expense or both transactions when calculating running balance over time." />
+          <TooltipIcon text="Select which transaction types (income, expense, or both) to include when calculating the running balance over time." />
         </div>
       </div>
 

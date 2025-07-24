@@ -25,13 +25,13 @@ The backend of this project strictly follows the **SOLID principles** of object-
 - ✅ Maintainability
 - ✅ Readability
 - ✅ Testability
-- ✅ Performance 
+- ✅ Performance
 
 The frontend of this project follows the **DRY principle** of frontend development to ensure:
 
 - ✅ Reusable UI Components
 - ✅ Abstraction
-- ✅ Global State Management (Zustand)
+- ✅ Global State Management (Context API)
 - ✅ Custom Hooks
 - ✅ Robust Error Handling
 
@@ -39,12 +39,12 @@ The frontend of this project follows the **DRY principle** of frontend developme
 
 ## 🔧 Tech Stack
 
-| Layer         | Tech                                                                       |
-| ------------- | -------------------------------------------------------------------------- |
-| **Frontend**  | React, TypeScript, Tailwind CSS, Zustand, Framer Motion, Topbar , Recharts |
-| **Backend**   | Spring Boot (Java), REST APIs                                              |
-| **Database**  | PostgreSQL (production), H2 (development)                                  |
-| **Utilities** | CSV/Text File I/O for import/export with PDF export supported.             |
+| Layer         | Tech                                                           |
+| ------------- | -------------------------------------------------------------- |
+| **Frontend**  | React, TypeScript, Tailwind CSS, Framer Motion, Recharts       |
+| **Backend**   | Spring Boot (Java), REST APIs                                  |
+| **Database**  | PostgreSQL (production), H2 (development)                      |
+| **Utilities** | CSV/Text File I/O for import/export with PDF export supported. |
 
 ---
 
@@ -95,7 +95,7 @@ The frontend of this project follows the **DRY principle** of frontend developme
 ## Previews
 
 - **Home Page**
-<img width="2559" height="1148" alt="Screenshot 2025-07-24 025735" src="https://github.com/user-attachments/assets/471b83be-3d45-45e9-b88f-33271b01e846" />
+  <img width="2559" height="1148" alt="Screenshot 2025-07-24 025735" src="https://github.com/user-attachments/assets/471b83be-3d45-45e9-b88f-33271b01e846" />
 
 ---
 
@@ -110,11 +110,10 @@ The frontend of this project follows the **DRY principle** of frontend developme
 ---
 
 - **Visualiser Page**
-<img width="2559" height="1278" alt="Screenshot 2025-07-24 022740" src="https://github.com/user-attachments/assets/af2eae79-50de-42b3-9b1f-90505d426469" />
-  
+  <img width="2559" height="1278" alt="Screenshot 2025-07-24 022740" src="https://github.com/user-attachments/assets/af2eae79-50de-42b3-9b1f-90505d426469" />
 
 - **Insights Section**
-<img width="2078" height="314" alt="Screenshot 2025-07-24 022757" src="https://github.com/user-attachments/assets/00f52cc5-b608-4514-b3cf-c3f0150d080a" />
+  <img width="2078" height="314" alt="Screenshot 2025-07-24 022757" src="https://github.com/user-attachments/assets/00f52cc5-b608-4514-b3cf-c3f0150d080a" />
 
 ---
 

@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react";
 import AnimatedNumber from "../../ui/AnimatedNumber";
 import { ArrowDownCircle, ArrowUpCircle, Wallet } from "lucide-react";
 import { useTransactions } from "../../hooks/useTransactions";
+import getFontSizeClass from "../../utils/getFontSize";
 
 export default function TransactionSummary() {
   const { allTransactions, allLoading, allError, fetchAllTransactions } =
@@ -39,7 +40,11 @@ export default function TransactionSummary() {
       <div className="bg-white/80 dark:bg-neutral-900 shadow-md rounded-lg px-6 py-4 text-center hover:scale-[1.02] hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300">
         <ArrowDownCircle className="mx-auto text-green-500 mb-2 w-6 h-6" />
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Incomes</p>
-        <h2 className="text-2xl font-semibold text-green-500">
+        <h2
+          className={`${getFontSizeClass(
+            income
+          )}font-semibold font-poppins text-green-500`}
+        >
           <AnimatedNumber value={income} />
         </h2>
       </div>
@@ -49,7 +54,11 @@ export default function TransactionSummary() {
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
           Expenses
         </p>
-        <h2 className="text-2xl font-semibold text-red-500">
+        <h2
+          className={`${getFontSizeClass(
+            income
+          )} font-semibold font-poppins text-red-500`}
+        >
           <AnimatedNumber value={expenses} />
         </h2>
       </div>
@@ -62,7 +71,7 @@ export default function TransactionSummary() {
         />
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Balance</p>
         <h2
-          className={`text-2xl font-semibold ${
+          className={`${getFontSizeClass(income)} font-poppins font-semibold ${
             balance >= 0 ? "text-blue-500" : "text-yellow-500"
           }`}
         >

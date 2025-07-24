@@ -1,4 +1,4 @@
-import { ArrowTrendingUpIcon } from "@heroicons/react/24/solid";
+import { TrendingUp } from "lucide-react";
 import clsx from "clsx";
 
 type StatCardProps = {
@@ -21,7 +21,7 @@ export default function StatCard({ label, value, className }: StatCardProps) {
           ₹{value.toLocaleString("en-IN")}
         </p>
       </div>
-      <ArrowTrendingUpIcon className="w-6 h-6 opacity-30" />
+      <TrendingUp className="w-6 h-6 opacity-30" />
     </div>
   );
 }

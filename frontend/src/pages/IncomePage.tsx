@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import { useTransactions } from "../hooks/useTransactions";
-import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
+import { DollarSign } from "lucide-react";
 import { TransactionList } from "../components/Transactions/TransactionList";
 import type { Transaction } from "../types/transaction";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { ChevronDown } from "lucide-react";
 
 function sortTransactions(
   transactions: Transaction[],
@@ -71,7 +71,7 @@ export default function IncomePage() {
           <option value="asc">Amount: Low to High</option>
           <option value="desc">Amount: High to Low</option>
         </select>
-        <ChevronDownIcon className="w-4 h-4 text-green-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+        <ChevronDown className="w-4 h-4 text-green-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
       </div>
       <div className="relative min-w-[180px]">
         <select
@@ -86,7 +86,7 @@ export default function IncomePage() {
           <option value="asc">Month: Low to High</option>
           <option value="desc">Month: High to Low</option>
         </select>
-        <ChevronDownIcon className="w-4 h-4 text-green-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+        <ChevronDown className="w-4 h-4 text-green-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
       </div>
     </>
   );
@@ -94,7 +94,7 @@ export default function IncomePage() {
   return (
     <div className="w-full px-4 pt-3 pb-4 h-screen flex flex-col overflow-hidden">
       <h2 className="text-3xl font-bold mb-3 text-white flex items-center gap-3">
-        <CurrencyDollarIcon className="w-8 h-8 text-green-400" /> Income
+        <DollarSign className="w-8 h-8 text-green-400" /> Income
       </h2>
       {loading ? (
         <div className="text-center text-gray-300 py-8">Loading...</div>

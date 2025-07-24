@@ -1,8 +1,4 @@
-import {
-  ArrowDownTrayIcon,
-  ArrowUpTrayIcon,
-} from "@heroicons/react/24/outline";
-import { ChevronRightIcon } from "@heroicons/react/24/solid";
+import { Upload, Download, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { useTransactionImport } from "@/hooks/useTransactionImport";
 import { handleExportFile } from "@/hooks/useTransactionExport";
@@ -39,7 +35,7 @@ export default function ImportExportButtons({
         />
         <label htmlFor="import-file-input">
           <span className="bg-white/5 backdrop-blur-md border border-white/10 text-white px-6 py-2 rounded-xl font-bold uppercase tracking-wide shadow-lg inline-flex items-center gap-2 cursor-pointer hover:scale-105 hover:shadow-green-300/40 active:scale-95 transition-all duration-200 focus:ring-4 focus:ring-green-300/40">
-            <ArrowUpTrayIcon className="w-5 h-5" /> Import CSV/Text
+            <Upload className="w-5 h-5" /> Import CSV/Text
           </span>
         </label>
         {importError && <div className="text-red-500 mt-1">{importError}</div>}
@@ -56,9 +52,9 @@ export default function ImportExportButtons({
           onBlur={() => setTimeout(() => setDropdownOpen(false), 150)}
           className="bg-white/5 backdrop-blur-md border border-white/10 text-white px-6 py-2 rounded-xl font-bold uppercase tracking-wide shadow-lg inline-flex items-center gap-2 hover:scale-105 hover:shadow-blue-300/40 active:scale-95 transition-all duration-200 focus:ring-4 focus:ring-blue-300/40"
         >
-          <ArrowDownTrayIcon className="w-5 h-5" />
+          <Download className="w-5 h-5" />
           EXPORT
-          <ChevronRightIcon className="w-5 h-5 ml-2" />
+          <ChevronRight className="w-5 h-5 ml-2" />
         </button>
         {dropdownOpen && (
           <div className="absolute right-0 mt-2 w-40 bg-gray-50 rounded-xl shadow-lg z-50 border border-gray-200 overflow-hidden animate-fade-in-up">

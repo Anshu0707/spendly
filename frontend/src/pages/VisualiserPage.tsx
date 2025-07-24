@@ -1,6 +1,6 @@
 // src/pages/VisualiserPage.tsx
 import { useState, useEffect } from "react";
-import { ChartBarIcon } from "@heroicons/react/24/solid";
+import { BarChart } from "lucide-react";
 import { useTransactions } from "../hooks/useTransactions";
 import {
   AnalyticsHeader,
@@ -50,7 +50,7 @@ export default function VisualiserPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-2 overflow-y-auto my-2 ">
       <AnalyticsHeader
         icon={
-          <ChartBarIcon className="w-12 h-12 md:w-16 md:h-16 text-violet-400 drop-shadow-lg" />
+          <BarChart className="w-12 h-12 md:w-16 md:h-16 text-violet-400 drop-shadow-lg" />
         }
       />
 

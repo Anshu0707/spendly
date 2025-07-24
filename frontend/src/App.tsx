@@ -5,32 +5,32 @@ import TransactionsPage from "./pages/TransactionsPage";
 import IncomePage from "./pages/IncomePage";
 import ExpensesPage from "./pages/ExpensesPage";
 import {
-  HomeIcon,
-  CurrencyDollarIcon,
-  ArrowTrendingDownIcon,
-  ChartBarIcon,
-  MagnifyingGlassIcon,
-  BanknotesIcon,
-} from "@heroicons/react/24/outline";
+  Home,
+  DollarSign,
+  TrendingDown,
+  BarChart3,
+  Search,
+  PiggyBank,
+} from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 function Sidebar() {
   const location = useLocation();
   const navLinks = [
-    { to: "/", label: "Home", icon: HomeIcon },
-    { to: "/income", label: "Income", icon: CurrencyDollarIcon },
-    { to: "/expenses", label: "Expenses", icon: ArrowTrendingDownIcon },
-    { to: "/visualiser", label: "Visualiser", icon: ChartBarIcon },
+    { to: "/", label: "Home", icon: Home },
+    { to: "/income", label: "Income", icon: DollarSign },
+    { to: "/expenses", label: "Expenses", icon: TrendingDown },
+    { to: "/visualiser", label: "Visualiser", icon: BarChart3 },
   ];
   return (
     <aside className="fixed inset-y-0 left-0 w-64 bg-gray-900 border-r border-gray-800 flex flex-col z-30">
       <div className="flex items-center h-16 px-6 text-2xl font-bold text-white tracking-wide border-b border-gray-800 gap-3">
-        <BanknotesIcon className="w-8 h-8 text-green-400" />
+        <PiggyBank className="w-8 h-8 text-green-400" />
         SpendWise
       </div>
       <div className="px-4 py-4">
         <div className="relative mb-6">
-          <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 absolute left-3 top-2.5" />
+          <Search className="w-5 h-5 text-gray-400 absolute left-3 top-2.5" />
           <input
             type="text"
             placeholder="Search..."

@@ -169,7 +169,7 @@ export default function AddTransactionForm({
         whileTap={{ scale: 0.95 }}
         type="submit"
         disabled={loading}
-        className="mt-16 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-6 py-3 rounded-xl font-bold text-white tracking-widest uppercase shadow-md hover:shadow-pink-500/30 transition-all duration-200 disabled:opacity-50"
+        className="mt-16 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-teal-500 to-indigo-500 px-6 py-3 rounded-xl font-bold text-white tracking-widest uppercase shadow-md hover:shadow-pink-500/30 transition-all duration-200 disabled:opacity-50"
       >
         {loading ? "Adding..." : "Add Transaction"}
         <ArrowRight className="w-5 h-5" />

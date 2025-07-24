@@ -41,7 +41,7 @@ The frontend of this project follows the **DRY principle** of frontend developme
 
 | Layer         | Tech                                                           |
 | ------------- | -------------------------------------------------------------- |
-| **Frontend**  | React, TypeScript, Tailwind CSS, Framer Motion, Recharts       |
+| **Frontend**  | React, TypeScript, Tailwind CSS, Framer Motion, D3.JS          |
 | **Backend**   | Spring Boot (Java), REST APIs                                  |
 | **Database**  | PostgreSQL (production), H2 (development)                      |
 | **Utilities** | CSV/Text File I/O for import/export with PDF export supported. |

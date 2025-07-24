@@ -83,7 +83,7 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
         const pageKey = `p${customPage}`;
 
         const newTransactions: Transaction[] = (data.content || []).map(
-          (tx, idx) => ({
+          (tx: Transaction, idx: number) => ({
             ...tx,
             id: `${tx.date}-${tx.amount}-${tx.category}-${pageKey}-${idx}`,
           })

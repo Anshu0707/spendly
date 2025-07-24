@@ -1,6 +1,7 @@
 # 💸 Spendly
 
 A modern and elegant expense tracking application built with **React**, **TypeScript**, and **Spring Boot**. This tool empowers users to manage, categorize, and visualize their financial transactions with clarity and ease — all while following best practices in software design and architecture.
+
 🌐 Live Site:  [Spendly](https://spendly-scsi.onrender.com/)
 ---
 

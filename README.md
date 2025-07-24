@@ -46,7 +46,7 @@ The frontend of this project follows the **DRY principle** of frontend developme
 | **Database**  | PostgreSQL (production), H2 (development)                      |
 | **Utilities** | CSV/Text File I/O for import/export with PDF export supported. |
 
-### Sample Upload Files in **'public/test-data folder'**
+### Sample Upload Files in **'public/test-data' folder.**
 ---
 
 ## 🚀 Getting Started

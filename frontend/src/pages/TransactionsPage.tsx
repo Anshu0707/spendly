@@ -33,7 +33,7 @@ export default function TransactionsPage() {
   return (
     <section className="w-full max-w-6xl mx-auto flex flex-col md:flex-row gap-8 items-stretch pt-8">
       {/* Left: Form + Summary */}
-      <div className="flex-1 flex flex-col gap-8 min-w-[340px] h-full justify-start">
+      <div className="flex-1 flex flex-col gap-8 min-w-[340px] h-full justify-start ">
         <div className="w-full">
           <AddTransactionForm />
         </div>

@@ -35,7 +35,7 @@ export default function TransactionSummary() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 justify-center mb-10 animate-fade-in bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-lg p-2 mx-auto mt-5">
+    <div className="flex flex-col md:flex-row gap-4 justify-center mb-10 animate-fade-in bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-lg p-2 mx-auto mt-5">
       <div className="bg-white/80 dark:bg-neutral-900 shadow-md rounded-lg px-6 py-4 text-center hover:scale-[1.02] hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300">
         <ArrowDownCircle className="mx-auto text-green-500 mb-2 w-6 h-6" />
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Incomes</p>

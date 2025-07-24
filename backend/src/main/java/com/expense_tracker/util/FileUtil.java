@@ -55,13 +55,13 @@ public class FileUtil {
         }
     }
 
-    // Assuming CSV file format: amount,transactionType,categoryType,date(yyyy-MM-dd)
+   
     public static List<Transaction> readTransactionsFromCSV(String filePath) throws IOException {
         List<Transaction> transactions = new ArrayList<>();
         try (BufferedReader br = Files.newBufferedReader(Path.of(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // Skip empty lines or headers if needed here
+                // Skip empty lines or headers 
                 if (line.isBlank() || line.startsWith("amount") || line.startsWith("Amount") ) continue;
 
                 String[] parts = line.split(",");
@@ -85,7 +85,7 @@ public class FileUtil {
 
     public static void writeTransactionsToCSV(String filePath, List<Transaction> transactions) throws IOException {
         List<String> lines = new ArrayList<>();
-        lines.add("Amount,TransactionType,CategoryType,Date"); // header
+        lines.add("Amount,TransactionType,CategoryType,Date"); // Header
 
         for (Transaction tx : transactions) {
             String line = String.format("%.2f,%s,%s,%s",
@@ -107,7 +107,7 @@ public class FileUtil {
             grouped.computeIfAbsent(key, k -> new ArrayList<>()).add(tx);
         }
 
-        // Build summary for each group
+        // Summary for each group
         for (Map.Entry<String, List<Transaction>> entry : grouped.entrySet()) {
             String month = entry.getKey();
             List<Transaction> txList = entry.getValue();
@@ -126,7 +126,7 @@ public class FileUtil {
             lines.add(String.format("Income: ₹%.2f", income));
             lines.add(String.format("Expense: ₹%.2f", expense));
             lines.add(String.format("Net: ₹%.2f", net));
-            lines.add(""); // blank line between summaries
+            lines.add(""); 
         }
 
         lines.add("===================================");

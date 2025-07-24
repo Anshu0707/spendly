@@ -17,7 +17,7 @@ public class TransactionCsvRecord {
     private String categoryType;
 
     @CsvBindByName
-    private String date; // use String for parsing
+    private String date; 
 
     // Getters and setters
     public double getAmount() { return amount; }

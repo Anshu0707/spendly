@@ -40,7 +40,7 @@ private Category category;
     @Column(nullable = false)
     private LocalDate date;
 
-    protected Transaction() {} // Required by JPA
+    protected Transaction() {} 
 
     public Transaction(double amount, TransactionType transactionType, Category category, LocalDate date) {
         this.amount = amount;

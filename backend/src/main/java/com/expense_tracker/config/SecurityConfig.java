@@ -19,7 +19,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/**").permitAll()
                 .anyRequest().authenticated()
             )
-            .httpBasic(Customizer.withDefaults()); // Enable basic auth if needed later
+            .httpBasic(Customizer.withDefaults()); // Enable basic auth for future cases.
 
         return http.build();
     }

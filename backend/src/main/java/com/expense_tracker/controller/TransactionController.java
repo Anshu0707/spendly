@@ -118,7 +118,7 @@ public ResponseEntity<String> uploadTransactions(@RequestParam("file") Multipart
     private Transaction mapToTransaction(TransactionDTO dto) {
         try {
             CategoryType categoryType = CategoryType.valueOf(dto.getCategoryType().toUpperCase());
-            TransactionType type = categoryType.getTransactionType(); // derived safely
+            TransactionType type = categoryType.getTransactionType(); 
     
             Category category = new Category(dto.getCategory(), categoryType);
             return new Transaction(dto.getAmount(), type, category, dto.getDate());

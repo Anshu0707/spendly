@@ -4,6 +4,7 @@ import {
   useState,
   useCallback,
   useMemo,
+  useRef,
 } from "react";
 import type { ReactNode } from "react";
 import topbar from "topbar";
@@ -50,6 +51,8 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
   const [totalPages, setTotalPages] = useState(1);
   const [totalElements, setTotalElements] = useState(0);
 
+  const fetchingRef = useRef(false);
+
   useEffect(() => {
     topbar.config({
       barColors: { "0": "#a78bfa", "1.0": "#ec4899" },
@@ -61,6 +64,9 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
 
   const fetchTransactions = useCallback(
     async (reset = false, customPage = page, customSize = size) => {
+      if (fetchingRef.current) return;
+      fetchingRef.current = true;
+
       setLoading(true);
       setError(null);
       topbar.show();
@@ -74,19 +80,25 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
         const data = await res.json();
         setTotalPages(data.totalPages || 1);
         setTotalElements(data.totalElements || 0);
-        const newTransactions = data.content || [];
+        const pageKey = `p${customPage}`;
+
+        const newTransactions: Transaction[] = (data.content || []).map(
+          (tx, idx) => ({
+            ...tx,
+            id: `${tx.date}-${tx.amount}-${tx.category}-${pageKey}-${idx}`,
+          })
+        );
 
         setTransactions((prev) =>
           reset ? newTransactions : [...prev, ...newTransactions]
         );
       } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("An unknown error occurred");
-        }
+        setError(
+          err instanceof Error ? err.message : "An unknown error occurred"
+        );
       } finally {
         setLoading(false);
+        fetchingRef.current = false;
         topbar.hide();
       }
     },
@@ -152,6 +164,7 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
 
   const loadMore = useCallback(() => {
     if (!hasMore || loading) return;
+
     const nextPage = page + 1;
     setPage(nextPage);
     fetchTransactions(false, nextPage, size);

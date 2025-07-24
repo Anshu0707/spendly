@@ -1,7 +1,10 @@
+// src/components/Transactions/AddTransactionForm.tsx
 import { useState } from "react";
+import { useTransactions } from "@/hooks/useTransactions";
 import DatePicker from "react-datepicker";
+import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import "react-datepicker/dist/react-datepicker.css";
-import { useTransactions } from "../../hooks/useTransactions"; // <-- Import the context hook
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -28,7 +31,7 @@ export default function AddTransactionForm({
   headerClassName?: string;
   title?: string;
 }) {
-  const { refresh } = useTransactions(); // <-- Use the context refresh
+  const { refresh, fetchAllTransactions } = useTransactions();
   const [form, setForm] = useState(initialForm);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -62,12 +65,11 @@ export default function AddTransactionForm({
     setSuccess(null);
     setLoading(true);
     try {
-      // Prepare payload for backend
       const payload = {
         amount: Number(form.amount),
         transactionType: form.transactionType,
-        category: form.categoryType, // flat string
-        categoryType: form.categoryType, // categoryType is INCOME or EXPENSE
+        category: form.categoryType,
+        categoryType: form.categoryType,
         date:
           form.date instanceof Date
             ? form.date.toISOString().slice(0, 10)
@@ -81,7 +83,8 @@ export default function AddTransactionForm({
       if (!res.ok) throw new Error("Failed to add transaction");
       setSuccess("Transaction added!");
       setForm(initialForm);
-      refresh(); // <-- Refresh the context after successful add
+      refresh();
+      fetchAllTransactions(); // Refresh full dataset for summary
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
@@ -92,25 +95,19 @@ export default function AddTransactionForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-gradient-to-br from-white/80 via-violet-100/70 to-pink-100/70 shadow-2xl rounded-3xl p-6 md:p-8 max-w-xl mx-auto mb-8 backdrop-blur-md border border-violet-100/60"
+      className="bg-gradient-to-br from-gray-800 via-gray-900 to-black/80 border border-gray-700 rounded-xl shadow-xl p-6"
     >
       <h2
         className={
-          headerClassName || "text-2xl font-bold mb-6 text-primary text-center"
+          headerClassName ||
+          "text-3xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 text-center drop-shadow"
         }
       >
         {title || "Add Transaction"}
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <div className="flex items-center justify-between mb-2">
-            <label className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-500 via-pink-400 to-orange-400 uppercase tracking-wide drop-shadow-sm">
-              Amount
-            </label>
-            <span className="inline-block px-2 py-1 text-xs font-semibold bg-gradient-to-r from-green-500 to-emerald-400 text-white rounded-full shadow-sm">
-              Text
-            </span>
-          </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+        <FormField label="Amount" tag="Number">
           <input
             type="number"
             name="amount"
@@ -119,44 +116,30 @@ export default function AddTransactionForm({
             min={0.01}
             step={0.01}
             required
-            className="w-full border border-violet-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white text-gray-900 placeholder-gray-400 shadow-md transition-all duration-200 focus:shadow-pink-200/60"
+            className="input-style"
           />
-        </div>
-        <div>
-          <div className="flex items-center justify-between mb-2">
-            <label className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-500 via-pink-400 to-orange-400 uppercase tracking-wide drop-shadow-sm">
-              Type
-            </label>
-            <span className="inline-block px-2 py-1 text-xs font-semibold bg-gradient-to-r from-green-500 to-emerald-400 text-white rounded-full shadow-sm">
-              Dropdown
-            </span>
-          </div>
+        </FormField>
+
+        <FormField label="Type" tag="Dropdown">
           <select
             name="transactionType"
             value={form.transactionType}
             onChange={handleChange}
-            className="w-full border border-violet-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white text-gray-900 shadow-md transition-all duration-200 focus:shadow-pink-200/60"
             required
+            className="input-style bg-[#1e1e2e] text-white"
           >
             <option value="INCOME">INCOME</option>
             <option value="EXPENSE">EXPENSE</option>
           </select>
-        </div>
-        <div>
-          <div className="flex items-center justify-between mb-2">
-            <label className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-500 via-pink-400 to-orange-400 uppercase tracking-wide drop-shadow-sm">
-              Category
-            </label>
-            <span className="inline-block px-2 py-1 text-xs font-semibold bg-gradient-to-r from-green-500 to-emerald-400 text-white rounded-full shadow-sm">
-              Dropdown
-            </span>
-          </div>
+        </FormField>
+
+        <FormField label="Category" tag="Dropdown">
           <select
             name="categoryType"
             value={form.categoryType}
             onChange={handleChange}
-            className="w-full border border-violet-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white text-gray-900 shadow-md transition-all duration-200 focus:shadow-pink-200/60"
             required
+            className="input-style bg-[#1e1e2e] text-white"
           >
             {CATEGORY_TYPE_OPTIONS.filter(
               (opt) => opt.type === form.transactionType
@@ -166,38 +149,60 @@ export default function AddTransactionForm({
               </option>
             ))}
           </select>
-        </div>
-        <div>
-          <div className="flex items-center justify-between mb-2">
-            <label className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-500 via-pink-400 to-orange-400 uppercase tracking-wide drop-shadow-sm">
-              Date
-            </label>
-            <span className="inline-block px-2 py-1 text-xs font-semibold bg-gradient-to-r from-green-500 to-emerald-400 text-white rounded-full shadow-sm">
-              Date
-            </span>
-          </div>
+        </FormField>
+
+        <FormField label="Date" tag="Calendar">
           <DatePicker
             selected={form.date}
             onChange={handleDateChange}
             dateFormat="yyyy-MM-dd"
-            className="w-full border border-violet-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white text-gray-900 shadow-md transition-all duration-200 focus:shadow-pink-200/60"
+            className="input-style bg-[#1e1e2e] text-white"
             wrapperClassName="w-full"
             required
             popperClassName="z-50"
           />
-        </div>
+        </FormField>
       </div>
-      <button
+
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         type="submit"
-        className="mt-8 w-full bg-gradient-to-r from-violet-500 via-pink-400 to-orange-400 text-white px-6 py-3 rounded-xl font-extrabold shadow-xl hover:scale-105 hover:shadow-pink-300/40 active:scale-95 transition-all duration-200 disabled:opacity-50 tracking-wider uppercase drop-shadow-md focus:outline-none focus:ring-4 focus:ring-pink-300/40"
         disabled={loading}
+        className="mt-16 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-6 py-3 rounded-xl font-bold text-white tracking-widest uppercase shadow-md hover:shadow-pink-500/30 transition-all duration-200 disabled:opacity-50"
       >
         {loading ? "Adding..." : "Add Transaction"}
-      </button>
-      {error && <div className="text-red-500 mt-4 text-center">{error}</div>}
+        <ArrowRight className="w-5 h-5" />
+      </motion.button>
+
+      {error && <p className="text-red-400 mt-4 text-center">{error}</p>}
       {success && (
-        <div className="text-green-600 mt-4 text-center">{success}</div>
+        <p className="text-emerald-400 mt-4 text-center">{success}</p>
       )}
     </form>
+  );
+}
+
+function FormField({
+  label,
+  tag,
+  children,
+}: {
+  label: string;
+  tag: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-2">
+        <label className="font-bold text-sm text-white/80 uppercase tracking-wide">
+          {label}
+        </label>
+        <span className="text-xs bg-gradient-to-r from-blue-500 to-green-400 text-white rounded-full px-2 py-1 font-semibold shadow-sm">
+          {tag}
+        </span>
+      </div>
+      {children}
+    </div>
   );
 }

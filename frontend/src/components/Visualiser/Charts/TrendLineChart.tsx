@@ -72,7 +72,7 @@ export default function TrendLineChart({
 
   return (
     <div className="w-full">
-      <div className="mb-4 ml-2">
+      <div className="ml-2">
         <IncomeExpenseToggle
           showIncome={showIncome}
           showExpense={showExpense}
@@ -113,7 +113,7 @@ export default function TrendLineChart({
           </LineChart>
         </ResponsiveContainer>
       ) : (
-        <p className="text-center text-gray-500 italic mt-10">
+        <p className="text-center text-gray-500 font-poppins text-2xl text-extrabold mt-10">
           No data to display for current toggles
         </p>
       )}

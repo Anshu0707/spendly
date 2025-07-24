@@ -17,7 +17,7 @@ export default function ChartRenderer({
   transactions,
 }: Props) {
   return (
-    <div className="w-full min-h-[420px] mb-6">
+    <div className="w-full h-[460px] mb-6">
       {(() => {
         switch (selectedChart) {
           case "Income vs Expense":

@@ -111,7 +111,7 @@ export default function CategoryAnalysisChart({
                 </PieChart>
               </ResponsiveContainer>
             ) : (
-              <p className="text-center text-gray-500 italic">
+              <p className="text-center text-gray-500 font-poppins text-2xl text-extrabold">
                 No data to display
               </p>
             )}

@@ -2,14 +2,17 @@ import { Lightbulb, Target, ThumbsUp, ListChecks } from "lucide-react";
 import { getInsights } from "@/utils/getInsights";
 import { getRecommendations } from "@/utils/getRecommendations";
 import type { Transaction } from "@/types/transaction";
-
+import { useMemo } from "react";
 type InsightPanelProps = {
   transactions: Transaction[];
 };
 
 export default function InsightPanel({ transactions }: InsightPanelProps) {
-  const insights = getInsights(transactions);
-  const recommendations = getRecommendations(transactions);
+  const insights = useMemo(() => getInsights(transactions), [transactions]);
+  const recommendations = useMemo(
+    () => getRecommendations(transactions),
+    [transactions]
+  );
 
   return (
     <div className="grid md:grid-cols-2 gap-6 w-full px-4 mt-14">

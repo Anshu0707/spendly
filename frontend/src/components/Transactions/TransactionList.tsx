@@ -1,5 +1,6 @@
 import type { Transaction } from "../../types/transaction";
 import { TransactionRow } from "./TransactionRow";
+import { PieChart } from "lucide-react";
 import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import { useTransactions } from "../../hooks/useTransactions";
@@ -35,7 +36,7 @@ export function TransactionList({
     }
   }, [hasMore, loadMore, loading]);
 
-  if (loading) {
+  if (loading && transactions.length === 0) {
     return (
       <div className="flex items-center justify-center h-80 w-full">
         <span className="inline-block w-16 h-16 border-4 border-violet-400 border-t-transparent rounded-full animate-spin"></span>
@@ -44,43 +45,55 @@ export function TransactionList({
   }
 
   return (
-    <div
-      ref={listRef}
-      className="flex-1 w-full overflow-y-auto overflow-x-hidden pr-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-      style={maxHeight ? { maxHeight } : undefined}
-    >
-      {/* Fixed Header Row */}
-      <div className="sticky top-0 z-10 bg-white/70 backdrop-blur-md border-b border-violet-200 p-6 mb-0 relative">
-        <div className="flex items-center justify-between w-full text-violet-700 font-semibold">
-          <div className="flex items-center gap-10 ml-2">
-            <div className="w-6 h-6 flex items-center justify-center">
-              <span className="text-lg">📊</span>
+    <div className="border border-gray-700 shadow-md rounded-none bg-black/30 backdrop-blur-md overflow-hidden">
+      <div
+        ref={listRef}
+        className="flex-1 w-full overflow-y-auto overflow-x-hidden pr-0 scrollbar-hide"
+        style={maxHeight ? { maxHeight } : undefined}
+      >
+        {/* Fixed Header Row */}
+        <div className="sticky top-0 z-10 p-4 bg-transparent backdrop-blur-lg border-b border-violet-300 rounded-md shadow-sm mx-0.5">
+          <div className="flex items-center justify-between w-full font-semibold text-violet-800 font-poppins text-sm sm:text-base">
+            <div className="flex items-center gap-10 ml-2">
+              <div className="w-6 h-6 flex items-center justify-center bg-orange-300 rounded-lg shadow font-medium text-extrabold text-lg font-poppins">
+                <PieChart className="w-4 h-4" />
+              </div>
+              <span className="text-orange-300 font-medium text-extrabold text-lg font-poppins">
+                Category
+              </span>
             </div>
-            <span>Category</span>
-          </div>
-          {headerControls && (
-            <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
-              {headerControls}
+
+            {headerControls && (
+              <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
+                {headerControls}
+              </div>
+            )}
+
+            <div className="flex items-center gap-10">
+              <span className="text-center w-[120px] text-orange-300 font-medium text-extrabold text-lg font-poppins">
+                Amount
+              </span>
+              <span className="text-center w-[110px] text-orange-300 font-medium text-extrabold text-lg font-poppins">
+                Date
+              </span>
             </div>
-          )}
-          <div className="flex items-center gap-8">
-            <span className="text-center w-[120px]">Amount</span>
-            <span className="text-center w-[110px]">Date</span>
           </div>
         </div>
+
+        <ul className="flex flex-col gap-0 w-full max-w-none">
+          {transactions.map((tx) => (
+            <TransactionRow
+              key={tx.id ?? `${tx.date}-${tx.amount}-${tx.category}`}
+              transaction={tx}
+              colorClass={colorClass}
+            />
+          ))}
+        </ul>
+
+        {loading && hasMore && (
+          <div className="py-4 text-center text-blue-700">Loading more...</div>
+        )}
       </div>
-      <ul className="flex flex-col gap-0 w-full max-w-none">
-        {transactions.map((tx, index) => (
-          <TransactionRow
-            key={index}
-            transaction={tx}
-            colorClass={colorClass}
-          />
-        ))}
-      </ul>
-      {loading && hasMore && (
-        <div className="py-4 text-center text-gray-400">Loading more...</div>
-      )}
     </div>
   );
 }

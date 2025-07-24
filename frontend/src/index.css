@@ -129,3 +129,15 @@ button:focus-visible {
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
 }
+
+@layer components {
+  .input-style {
+    @apply w-full px-4 py-2 bg-[#1e1e2e] text-white border border-white/20 rounded-lg outline-none focus:ring-2 focus:ring-pink-500 transition;
+    font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  }
+}
+
+select option {
+  font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+}
+

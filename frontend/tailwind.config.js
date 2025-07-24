@@ -10,9 +10,12 @@ export default {
         primary: "#a78bfa", // violet-400
         accent: "#f472b6", // pink-400
         background: "#f3f4f6", // gray-100
+        neon: "#e0f2fe", // light cyan pop
+        glow: "#fef3c7",
       },
       boxShadow: {
         glass: "0 4px 30px rgba(0, 0, 0, 0.1)",
+        aurora: "0 4px 24px rgba(244, 114, 182, 0.3)", // pink accent
       },
       backdropBlur: {
         xs: "2px",

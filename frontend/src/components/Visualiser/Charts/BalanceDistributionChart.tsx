@@ -26,9 +26,9 @@ type ChartData = {
 };
 
 const TooltipIcon = ({ text }: { text: string }) => (
-  <div className="relative group inline-block z-30">
+  <div className="relative group inline-block z-30 align-middle mb-4">
     <span
-      className="ml-1 inline-flex items-center justify-center w-4 h-4 text-black bg-white border border-gray-400 rounded-full text-xs font-bold cursor-help"
+      className="ml-1 inline-flex items-center justify-center w-4 h-4 text-black bg-white border border-gray-400 rounded-full text-xs font-bold cursor-help align-middle"
       tabIndex={0}
       aria-label={text}
     >
@@ -86,7 +86,7 @@ export default function BalanceDistributionChart({
             showExpense={showExpense}
             toggleType={toggleType}
           />
-          <TooltipIcon text="Include income and expense transactions when calculating running balance over time." />
+          <TooltipIcon text="Include income or expense or both transactions when calculating running balance over time." />
         </div>
       </div>
 
@@ -112,7 +112,7 @@ export default function BalanceDistributionChart({
           </AreaChart>
         </ResponsiveContainer>
       ) : (
-        <p className="text-center text-gray-500 italic mt-10">
+        <p className="text-center text-gray-500 font-poppins text-2xl text-extrabold mt-10">
           No data to display for current toggles
         </p>
       )}

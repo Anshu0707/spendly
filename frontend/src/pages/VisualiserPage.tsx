@@ -47,7 +47,7 @@ export default function VisualiserPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 overflow-y-auto my-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-2 overflow-y-auto my-2 ">
       <AnalyticsHeader
         icon={
           <ChartBarIcon className="w-12 h-12 md:w-16 md:h-16 text-violet-400 drop-shadow-lg" />

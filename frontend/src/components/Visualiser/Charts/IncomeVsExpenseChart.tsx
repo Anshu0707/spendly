@@ -141,37 +141,39 @@ export default function IncomeVsExpenseChart({
         showExpense={showExpense}
         toggleType={toggleType}
       />
-      {data.length > 0 ? (
-        <ResponsiveContainer width="100%" height={400}>
-          <BarChart data={data}>
-            <XAxis dataKey="label" stroke="#ccc" />
-            <YAxis stroke="#ccc" />
-            <Tooltip
-              contentStyle={{ backgroundColor: "#1f2937", border: "none" }}
-              labelStyle={{ color: "#fff" }}
-            />
-            <Legend />
-            <Bar
-              dataKey="income"
-              name="Income"
-              fill="#10b981"
-              fillOpacity={showIncome ? 1 : 0}
-              isAnimationActive={false}
-            />
-            <Bar
-              dataKey="expense"
-              name="Expense"
-              fill="#ef4444"
-              fillOpacity={showExpense ? 1 : 0}
-              isAnimationActive={false}
-            />
-          </BarChart>
-        </ResponsiveContainer>
-      ) : (
-        <p className="text-center text-gray-500 italic mt-10">
-          No data to display for selected period
-        </p>
-      )}
+      <div className="min-h-[420px] flex items-center justify-center">
+        {data.length > 0 && (showIncome || showExpense) ? (
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart data={data}>
+              <XAxis dataKey="label" stroke="#ccc" />
+              <YAxis stroke="#ccc" />
+              <Tooltip
+                contentStyle={{ backgroundColor: "#1f2937", border: "none" }}
+                labelStyle={{ color: "#fff" }}
+              />
+              <Legend />
+              <Bar
+                dataKey="income"
+                name="Income"
+                fill="#10b981"
+                fillOpacity={showIncome ? 1 : 0}
+                isAnimationActive={false}
+              />
+              <Bar
+                dataKey="expense"
+                name="Expense"
+                fill="#ef4444"
+                fillOpacity={showExpense ? 1 : 0}
+                isAnimationActive={false}
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        ) : (
+          <p className="text-center text-gray-500 font-poppins text-2xl font-extrabold">
+            No data to display for selected period
+          </p>
+        )}
+      </div>
     </div>
   );
 }

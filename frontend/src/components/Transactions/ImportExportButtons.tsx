@@ -130,7 +130,7 @@ export default function ImportExportButtons({
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 mb-8 max-w-xl mx-auto">
+    <div className="flex flex-col md:flex-row gap-4 max-w-xl mx-auto bg-">
       <div>
         <input
           type="file"
@@ -141,7 +141,7 @@ export default function ImportExportButtons({
           id="import-file-input"
         />
         <label htmlFor="import-file-input">
-          <span className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 via-emerald-400 to-lime-400 text-white px-6 py-2 rounded-xl font-bold uppercase tracking-wide shadow-lg cursor-pointer hover:scale-105 hover:shadow-green-300/40 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-green-300/40">
+          <span className="bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-lg inline-flex items-center gap-2  text-white px-6 py-2 rounded-xl font-bold uppercase tracking-wide shadow-lg cursor-pointer hover:scale-105 hover:shadow-green-300/40 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-green-300/40">
             <ArrowUpTrayIcon className="w-5 h-5" /> Import CSV/Text
           </span>
         </label>
@@ -155,7 +155,7 @@ export default function ImportExportButtons({
           type="button"
           onClick={() => setDropdownOpen((v) => !v)}
           onBlur={() => setTimeout(() => setDropdownOpen(false), 150)}
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 via-violet-400 to-pink-400 text-white px-6 py-2 rounded-xl font-bold uppercase tracking-wide shadow-lg hover:scale-105 hover:shadow-blue-300/40 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-300/40"
+          className="bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-lg inline-flex items-center gap-2  text-white px-6 py-2 rounded-xl font-bold uppercase tracking-wide shadow-lg hover:scale-105 hover:shadow-blue-300/40 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-300/40"
         >
           <ArrowDownTrayIcon className="w-5 h-5" />
           EXPORT

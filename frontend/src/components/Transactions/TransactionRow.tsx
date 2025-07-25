@@ -26,11 +26,13 @@ export function TransactionRow({
             <div className="w-6 h-6 flex items-center justify-center">
               <CategoryIcon category={tx.category} />
             </div>
-            <span className="text-gray-300 font-medium">{tx.category}</span>
+            <span className="text-gray-300 text-md font-semibold font-poppins">
+              {tx.category}
+            </span>
           </div>
           <div className="flex items-center gap-8">
             <span
-              className={`text-lg font-semibold ${
+              className={`text-md font-semibold font-poppins ${
                 tx.transactionType === "INCOME"
                   ? "text-green-300"
                   : "text-pink-300"
@@ -38,7 +40,7 @@ export function TransactionRow({
             >
               ₹{tx.amount.toFixed(2)}
             </span>
-            <span className="text-gray-400 text-sm text-center w-[110px]">
+            <span className="text-gray-300 text-md font-semibold font-poppins text-center w-[110px]">
               {new Date(tx.date).toLocaleDateString()}
             </span>
           </div>

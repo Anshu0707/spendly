@@ -107,8 +107,8 @@ export default function IncomePage() {
       ) : (
         <TransactionList
           transactions={sortedTransactions}
-          colorClass="border-green-500"
-          maxHeight="700px"
+          colorClass="border-green-500 border-solid"
+          maxHeight="800px"
           headerControls={headerControls}
         />
       )}

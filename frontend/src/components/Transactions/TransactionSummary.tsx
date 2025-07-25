@@ -43,7 +43,7 @@ export default function TransactionSummary() {
         <h2
           className={`${getFontSizeClass(
             income
-          )}font-semibold font-poppins text-green-500`}
+          )}font-semibold font-poppins text-green-500 text-lg`}
         >
           <AnimatedNumber value={income} />
         </h2>
@@ -57,7 +57,7 @@ export default function TransactionSummary() {
         <h2
           className={`${getFontSizeClass(
             income
-          )} font-semibold font-poppins text-red-500`}
+          )} font-semibold font-poppins text-red-500 text-lg`}
         >
           <AnimatedNumber value={expenses} />
         </h2>
@@ -71,7 +71,9 @@ export default function TransactionSummary() {
         />
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Balance</p>
         <h2
-          className={`${getFontSizeClass(income)} font-poppins font-semibold ${
+          className={`${getFontSizeClass(
+            income
+          )} font-poppins font-semibold text-lg ${
             balance >= 0 ? "text-blue-500" : "text-yellow-500"
           }`}
         >

@@ -103,8 +103,8 @@ export default function ExpensesPage() {
       ) : (
         <TransactionList
           transactions={sortedTransactions}
-          colorClass="border-pink-500"
-          maxHeight="700px"
+          colorClass="border-pink-500 border-solid"
+          maxHeight="800px"
           headerControls={headerControls}
         />
       )}
